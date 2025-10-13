@@ -1,227 +1,616 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Kállita Design — Portfólio</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Kallita Design — Portfólio</title>
 
-<!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
-<style>
-  :root{
-    --red-dark:#6b0f0f;
-    --black:#0b0b0b;
-    --beige:#f6e7d2;
-    --muted:#bdb0a4;
-    --radius-lg:28px;
-    --maxw:1200px;
-  }
+  <style>
+    /* =========================
+       VARIÁVEIS DE CORES & RESET
+       ========================= */
+    :root{
+      --bg: #fbeee6;            /* fundo bege */
+      --hero: #f05652;          /* vermelho coral (hero) */
+      --plate: #7bb268;         /* faixa verde */
+      --accent-yellow: #f5b700; /* amarelo nav */
+      --accent-teal: #28d0a0;   /* verde água */
+      --button: #ff6b5c;        /* botão principal */
+      --text: #3b2a2a;
+      --muted: #a87f70;
+      --card: #ff6b63;          /* cards de serviço - tom coral */
+      --white: #fff;
+      --shadow: 0 8px 20px rgba(18,18,18,0.08);
+      --radius-lg: 22px;
+    }
 
-  *{box-sizing:border-box;margin:0;padding:0}
-  body{font-family:'Inter',sans-serif;background:var(--black);color:var(--beige);line-height:1.5;-webkit-font-smoothing:antialiased;}
-  a{text-decoration:none;color:inherit;transition:0.3s;}
-  img{max-width:100%;display:block;}
-  .container{max-width:var(--maxw);margin:0 auto;padding:0 20px;}
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:"Poppins",system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background:var(--bg);
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.5;
+    }
 
-  /* HEADER */
-  header{position:sticky;top:0;z-index:10;background:rgba(11,11,11,0.95);backdrop-filter:blur(4px);}
-  .header-inner{display:flex;align-items:center;justify-content:space-between;height:74px;}
-  .logo img{height:40px;}
-  nav{display:flex;gap:20px;}
-  nav a{padding:8px 12px;border-radius:12px;font-weight:500;}
-  nav a:hover{background:rgba(255,255,255,0.05);}
-  .cta{background:var(--red-dark);color:var(--beige);padding:8px 14px;border-radius:20px;font-weight:700;}
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;height:auto;display:block}
 
-  /* HERO */
-  .hero{background:var(--red-dark);padding:90px 0;text-align:center;}
-  .hero h1{font-family:'Playfair Display',serif;font-size:44px;margin-bottom:16px;}
-  .hero p{max-width:640px;margin:0 auto 28px;color:rgba(255,255,255,0.85);}
-  .hero .btn{background:var(--beige);color:var(--black);padding:12px 24px;border-radius:24px;font-weight:700;}
+    /* NAV */
+    .topbar{
+      display:flex;
+      justify-content:center;
+      padding:18px 24px;
+      gap:18px;
+      align-items:center;
+      position:sticky;
+      top:0;
+      z-index:60;
+      backdrop-filter: blur(4px);
+    }
+    .nav{
+      display:flex;
+      gap:12px;
+      align-items:center;
+      max-width:1200px;
+      width:100%;
+      padding:0 12px;
+    }
+    .logo{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      margin-right:auto;
+    }
+    .brand{
+      font-family:"Baloo 2";
+      font-size:36px;
+      color:var(--hero);
+      letter-spacing:0.6px;
+    }
+    .tagline{ font-size:13px; color:var(--muted) }
 
-  /* ABOUT */
-  section{padding:80px 20px;}
-  .section-title{text-align:center;font-family:'Playfair Display',serif;font-size:28px;margin-bottom:10px;}
-  .muted{text-align:center;color:var(--muted);margin-bottom:40px;}
-  .about{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;}
-  .about img{border-radius:24px;}
-  .about p{color:var(--muted);margin-bottom:12px;}
+    .menu{
+      display:flex;
+      gap:12px;
+      align-items:center;
+    }
+    .menu a{
+      padding:8px 14px;
+      border-radius:20px;
+      font-weight:600;
+      font-size:14px;
+      transition:transform .18s ease, box-shadow .18s ease;
+    }
+    .menu a:hover{ transform:translateY(-3px) }
 
-  /* SERVICES */
-  .services{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;text-align:center;}
-  .service-card{border:1px solid rgba(255,255,255,0.06);border-radius:20px;padding:24px;}
-  .service-card h4{font-family:'Playfair Display',serif;margin-bottom:8px;}
+    .menu a:nth-child(1){ background:var(--accent-yellow); color:#4a2b00 }
+    .menu a:nth-child(2){ background:var(--accent-teal); color:#fff }
+    .menu a:nth-child(3){ background:#b85d3c; color:#fff }
+    .menu a:nth-child(4){ background:#f06b4a; color:#fff }
 
-  /* PORTFOLIO */
-  .portfolio{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;text-align:left;}
-  .project{background:rgba(255,255,255,0.03);border-radius:12px;overflow:hidden;}
-  .project img{height:220px;object-fit:cover;width:100%;}
-  .project-info{padding:14px;}
-  .project-info h4{font-family:'Playfair Display',serif;margin-bottom:4px;}
+    .hamburger{
+      display:none;
+      width:40px;height:40px;border-radius:8px;
+      background:var(--accent-yellow);
+      align-items:center;justify-content:center;
+      cursor:pointer;
+    }
 
-  /* TESTIMONIALS */
-  .testimonials{display:flex;flex-direction:column;gap:16px;max-width:800px;margin:0 auto;}
-  .test-card{border:1px solid rgba(255,255,255,0.06);border-radius:24px;padding:16px;display:flex;gap:14px;align-items:center;}
-  .test-card .avatar{width:60px;height:60px;border-radius:50%;overflow:hidden;}
-  .test-card small{color:var(--muted);display:block;margin-top:4px;}
+    /* HERO */
+    .hero{
+      max-width:1200px;
+      margin:20px auto;
+      background:var(--hero);
+      color:var(--white);
+      border-radius:12px;
+      padding:40px 32px;
+      box-shadow:var(--shadow);
+      position:relative;
+      overflow:hidden;
+      animation:fadeInUp .7s ease both;
+    }
+    .hero-grid{
+      display:flex;
+      gap:20px;
+      align-items:center;
+      justify-content:space-between;
+      flex-wrap:wrap;
+    }
+    .hero-left{ flex:1; min-width:260px }
+    .hero h1{
+      font-family:"Baloo 2";
+      font-size:84px;
+      margin:0 0 6px;
+      line-height:0.95;
+    }
+    .hero p{ margin:0; font-weight:600; opacity:.96 }
 
-  /* CONTACT */
-  .contact-wrap{background:var(--beige);color:var(--black);border-radius:26px;padding:32px;max-width:900px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:24px;}
-  .contact-wrap input,.contact-wrap textarea{width:100%;padding:10px;border:1px solid rgba(0,0,0,0.1);border-radius:8px;margin-bottom:10px;}
-  .contact-wrap .btn{background:var(--red-dark);color:var(--beige);padding:10px 16px;border-radius:20px;font-weight:700;}
-  .contact-info p{margin-bottom:10px;}
+    .metrics{
+      display:flex;
+      gap:12px;
+      margin-top:18px;
+      border-radius:10px;
+      overflow:hidden;
+    }
+    .metric{
+      flex:1;
+      background:rgba(255,255,255,0.08);
+      padding:14px 10px;
+      text-align:center;
+      border-radius:8px;
+    }
+    .metric h3{ margin:0; font-size:20px; color:#fff }
+    .metric span{display:block; font-size:12px; opacity:.95; margin-top:6px; color:#fdecec }
 
-  /* FOOTER */
-  footer{background:var(--red-dark);padding:24px 0;color:var(--beige);}
-  .footer-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;}
-  .footer-inner a{color:var(--beige);font-weight:500;}
-  .whatsapp{background:var(--red-dark);padding:10px 16px;border-radius:24px;display:inline-flex;align-items:center;gap:8px;font-weight:700;}
+    /* MAIN */
+    main{max-width:1200px;margin:28px auto;padding:0 18px 80px}
 
-  /* RESPONSIVE */
-  @media(max-width:900px){
-    .about{grid-template-columns:1fr;text-align:center;}
-    .services{grid-template-columns:1fr;}
-    .portfolio{grid-template-columns:1fr;}
-    .contact-wrap{grid-template-columns:1fr;}
-    nav{display:none;}
-  }
-</style>
+    /* ABOUT */
+    .about{
+      display:grid;
+      grid-template-columns: 240px 1fr;
+      gap:28px;
+      align-items:center;
+      margin-top:18px;
+    }
+    .about-photo{
+      width:240px;height:240px;border-radius:28px;background:var(--card);
+      display:flex;align-items:center;justify-content:center;overflow:hidden;
+      box-shadow:var(--shadow);
+    }
+    .about-photo img{width:100%;height:100%;object-fit:cover}
+    .about h3{ margin:0; font-family:"Baloo 2"; color:#d2543f; font-size:20px}
+    .about p{ color:var(--muted); margin-top:10px }
+
+    .cta-handle{
+      display:inline-block;
+      margin-top:14px;padding:10px 16px;border-radius:999px;
+      background:#ff6b63;color:#fff;font-weight:700;
+      box-shadow:0 8px 22px rgba(240,90,82,0.16);
+    }
+
+    /* PORTFÓLIO */
+    .section-title{
+      font-family:"Baloo 2";
+      color:#e06444;
+      margin:36px 0 18px;
+      font-size:22px;
+    }
+    .portfolio-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:18px;
+    }
+    .project{
+      background:linear-gradient(180deg, rgba(255,255,255,0.04), rgba(0,0,0,0.02));
+      padding:14px;border-radius:12px;min-height:200px;
+      display:flex;flex-direction:column;justify-content:end;position:relative;
+      overflow:hidden;box-shadow:var(--shadow);
+      transition:transform .28s ease, box-shadow .28s ease;
+    }
+    .project:hover{ transform:translateY(-10px); box-shadow:0 22px 48px rgba(18,18,18,0.12); }
+    .project .meta{ background:rgba(255,255,255,0.06); padding:10px;border-radius:8px;font-size:14px;color:#fff; margin-top:10px; }
+
+    .portfolio-controls{ text-align:center;margin-top:12px; opacity:.85 }
+
+    /* TESTIMONIALS */
+    .testimonials{ margin-top:30px }
+    .test-wrap{
+      display:flex;flex-direction:column;gap:14px;
+    }
+    .test-card{
+      background:var(--accent-teal);
+      color:var(--white);
+      padding:18px;border-radius:26px;box-shadow:var(--shadow);
+      display:flex;gap:14px;align-items:flex-start;
+      transition:transform .25s ease;
+    }
+    .test-card:hover{ transform:translateY(-6px) }
+    .avatar{
+      min-width:56px;height:56px;border-radius:50%;background:rgba(255,255,255,0.18);
+      display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--white);
+    }
+    .star{ color:#ffd66a; margin-left:auto; font-weight:700 }
+
+    /* SERVICES / PACKAGES */
+    .services-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:18px;
+      margin-top:14px;
+    }
+    .service-card{
+      background:var(--card); color:var(--white); padding:20px;border-radius:22px;
+      box-shadow:var(--shadow); min-height:200px;
+      display:flex;flex-direction:column; gap:10px; transition:transform .2s ease;
+    }
+    .service-card:hover{ transform:translateY(-8px) }
+    .service-card h4{ margin:0; font-family:"Baloo 2"; font-size:20px }
+
+    /* CONTACT */
+    .contact{
+      margin-top:36px;
+      background:var(--plate);
+      padding:28px;border-radius:20px;color:var(--white);
+      display:grid;grid-template-columns:1fr 1fr; gap:20px; align-items:start;
+    }
+    .contact .info p{ margin:8px 0; color:rgba(255,255,255,0.95) }
+
+    .contact form{
+      display:flex;flex-direction:column; gap:10px;
+    }
+    .field{
+      background:transparent;border:2px solid rgba(0,0,0,0.06);padding:12px;border-radius:10px;
+      outline:none;color:#fff;
+    }
+    .field::placeholder{ color:rgba(255,255,255,0.85) }
+    .btn{
+      background:var(--button); color:#fff; padding:12px 16px;border-radius:12px;border:none;
+      cursor:pointer;font-weight:700;display:inline-block;
+      box-shadow:0 8px 20px rgba(240,90,82,0.18);
+    }
+
+    /* FOOTER */
+    footer{
+      margin-top:36px;padding:32px 16px;background:var(--hero); color:var(--white);border-radius:8px;
+    }
+
+    /* RESPONSIVO */
+    @media (max-width:1000px){
+      .about{ grid-template-columns: 200px 1fr; }
+      .hero h1{ font-size:64px }
+      .portfolio-grid{ grid-template-columns:repeat(2,1fr) }
+      .services-grid{ grid-template-columns:repeat(2,1fr) }
+    }
+    @media (max-width:680px){
+      .topbar{padding:10px}
+      .brand{ font-size:30px }
+      .menu{ display:none }
+      .hamburger{ display:flex }
+      .hero h1{ font-size:46px }
+      .about{ grid-template-columns:1fr; grid-auto-rows:auto; }
+      .portfolio-grid{ grid-template-columns:1fr }
+      .services-grid{ grid-template-columns:1fr }
+      .contact{ grid-template-columns:1fr }
+    }
+
+    /* small animations */
+    @keyframes fadeInUp{
+      from{ opacity:0; transform:translateY(18px) }
+      to{ opacity:1; transform:none }
+    }
+
+    /* utils */
+    .muted{ color:var(--muted) }
+    .center{ text-align:center }
+    .small{ font-size:13px }
+    .pill{ display:inline-block;padding:8px 14px;border-radius:999px;background:rgba(0,0,0,.05);font-weight:600 }
+
+  </style>
 </head>
 <body>
 
-<!-- HEADER -->
-<header>
-  <div class="header-inner container">
-    <div class="logo">
-      <img src="https://i.imgur.com/cLgRexT.png" alt="Kállita Design">
-    </div>
-    <nav>
-      <a href="#home">Home</a>
-      <a href="#about">Sobre</a>
-      <a href="#services">Serviços</a>
-      <a href="#portfolio">Portfólio</a>
-      <a href="#contact" class="cta">Contato</a>
+  <!-- NAV -->
+  <header class="topbar" aria-label="site header">
+    <nav class="nav" role="navigation" aria-label="principal">
+      <div class="logo" aria-hidden="false">
+        <div class="brand">Kallita Design</div>
+        <div class="tagline">Design Estratégico & Identidade</div>
+      </div>
+
+      <div class="menu" role="menu" aria-label="menu principal">
+        <a href="#inicio">Início</a>
+        <a href="#servicos">Serviços</a>
+        <a href="#portfolio">Portfólio</a>
+        <a href="#contato">Contato</a>
+      </div>
+
+      <button class="hamburger" id="hambtn" aria-label="abrir menu">
+        <svg width="20" height="14" viewBox="0 0 24 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect y="1" width="24" height="2" rx="1" fill="#3b2a2a"/>
+          <rect y="7" width="24" height="2" rx="1" fill="#3b2a2a"/>
+          <rect y="13" width="24" height="2" rx="1" fill="#3b2a2a"/>
+        </svg>
+      </button>
     </nav>
-  </div>
-</header>
+  </header>
 
-<!-- HERO -->
-<section id="home" class="hero">
-  <h1>Criação de Identidades Visuais e Branding Exclusivo</h1>
-  <p>Transformo ideias em marcas memoráveis — com propósito, estética e autenticidade.</p>
-  <a href="#portfolio" class="btn">Ver Portfólio</a>
-</section>
+  <!-- HERO -->
+  <section id="inicio" class="hero" role="banner">
+    <div class="hero-grid">
+      <div class="hero-left">
+        <h1>Kallita</h1>
+        <p>Design estratégico • Identidade Visual • Conteúdo para redes</p>
 
-<!-- ABOUT -->
-<section id="about">
-  <h2 class="section-title">Sobre Mim</h2>
-  <p class="muted">Conheça um pouco do meu trabalho e trajetória</p>
-  <div class="about container">
-    <img src="https://via.placeholder.com/500x360?text=K%C3%A1llita+Design" alt="Sobre Kállita">
-    <div>
-      <p>Sou designer especializada em identidade visual e branding, com foco em conectar estética, propósito e estratégia para marcas que desejam se destacar no mercado.</p>
-      <p>Com criatividade e atenção aos detalhes, desenvolvo projetos únicos que traduzem a essência de cada cliente.</p>
-      <a href="#contact" class="cta">Fale Comigo</a>
-    </div>
-  </div>
-</section>
+        <div class="metrics" aria-hidden="true">
+          <div class="metric">
+            <h3>+500</h3>
+            <span>Marcas transformadas</span>
+          </div>
+          <div class="metric">
+            <h3>+5</h3>
+            <span>Anos de experiência</span>
+          </div>
+          <div class="metric">
+            <h3>4.9/5</h3>
+            <span>Clientes satisfeitos</span>
+          </div>
+        </div>
+      </div>
 
-<!-- SERVICES -->
-<section id="services">
-  <h2 class="section-title">Serviços</h2>
-  <p class="muted">Soluções completas para sua marca</p>
-  <div class="services container">
-    <div class="service-card">
-      <h4>Identidade Visual</h4>
-      <p>Criação de logotipo, paleta de cores, tipografia e elementos que comunicam a essência da sua marca.</p>
-    </div>
-    <div class="service-card">
-      <h4>Branding</h4>
-      <p>Estratégia de posicionamento, valores e personalidade de marca para conectar com o público certo.</p>
-    </div>
-    <div class="service-card">
-      <h4>Social Media</h4>
-      <p>Design e planejamento visual para redes sociais, garantindo consistência e reconhecimento.</p>
-    </div>
-  </div>
-</section>
-
-<!-- PORTFOLIO -->
-<section id="portfolio">
-  <h2 class="section-title">Últimos Projetos</h2>
-  <p class="muted">Alguns trabalhos recentes desenvolvidos com carinho</p>
-  <div class="portfolio container">
-    <div class="project">
-      <img src="https://via.placeholder.com/520x360?text=Projeto+1" alt="Projeto 1">
-      <div class="project-info">
-        <h4>Marca Aurora</h4>
-        <p class="muted">Identidade visual minimalista</p>
+      <div class="hero-right" style="min-width:240px; text-align:right;">
+        <!-- Placeholder para imagem de destaque ou mockup -->
+        <div style="width:220px;height:220px;border-radius:18px;background:#fff4f2;display:inline-block;padding:10px;box-shadow:var(--shadow);">
+          <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=a1f8f2a9f7b4a1ad3a2e5c0f901c2f5f" alt="Foto Kallita" style="width:100%;height:100%;object-fit:cover;border-radius:12px">
+        </div>
       </div>
     </div>
-    <div class="project">
-      <img src="https://via.placeholder.com/520x360?text=Projeto+2" alt="Projeto 2">
-      <div class="project-info">
-        <h4>Studio Luna</h4>
-        <p class="muted">Rebranding completo</p>
+  </section>
+
+  <main>
+
+    <!-- ABOUT -->
+    <section class="about" id="sobre" aria-labelledby="sobre-title">
+      <div class="about-photo" aria-hidden="true">
+        <!-- Substitua pela sua foto -->
+        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=a1f8f2a9f7b4a1ad3a2e5c0f901c2f5f" alt="Foto - Kallita">
+      </div>
+
+      <div class="about-copy">
+        <div class="small muted">Sobre</div>
+        <h3 id="sobre-title">Prazer, eu sou a Kallita</h3>
+        <p>
+          Sou designer especializada em criar identidades visuais com propósito — que conversam com o público certo e geram resultados.
+          Trabalho com branding, embalagens, direção de arte e conteúdo para redes sociais.
+          <!-- Espaço para você expandir sua biografia -->
+        </p>
+
+        <a class="cta-handle" href="https://instagram.com" target="_blank" rel="noopener"> @kallitadesign </a>
+      </div>
+    </section>
+
+    <!-- PORTFÓLIO -->
+    <h2 class="section-title" id="portfolio">Últimos Projetos</h2>
+    <div class="portfolio-grid" aria-live="polite">
+
+      <!-- Project 1 -->
+      <article class="project" role="article" aria-label="Projeto 1">
+        <div style="height:120px;background:linear-gradient(135deg,#ffecec,#f7cfc9);border-radius:12px;margin-bottom:10px"></div>
+        <div class="meta">
+          <strong>Projeto Exemplo A</strong>
+          <div class="small">Branding • Identidade</div>
+        </div>
+      </article>
+
+      <!-- Project 2 -->
+      <article class="project" role="article" aria-label="Projeto 2">
+        <div style="height:120px;background:linear-gradient(135deg,#e6fff0,#baf0d6);border-radius:12px;margin-bottom:10px"></div>
+        <div class="meta">
+          <strong>Projeto Exemplo B</strong>
+          <div class="small">Embalagem • Social</div>
+        </div>
+      </article>
+
+      <!-- Project 3 -->
+      <article class="project" role="article" aria-label="Projeto 3">
+        <div style="height:120px;background:linear-gradient(135deg,#fff2e8,#ffd6c4);border-radius:12px;margin-bottom:10px"></div>
+        <div class="meta">
+          <strong>Projeto Exemplo C</strong>
+          <div class="small">Identidade Visual</div>
+        </div>
+      </article>
+
+    </div>
+
+    <div class="portfolio-controls center" style="margin-top:14px">
+      <button class="pill" onclick="viewAll()">Ver portfólio completo →</button>
+    </div>
+
+    <!-- TESTIMONIALS -->
+    <h2 class="section-title">Depoimentos</h2>
+    <section class="testimonials" id="depoimentos" aria-label="depoimentos">
+      <div class="test-wrap" id="testWrap">
+
+        <!-- Testimonial 1 -->
+        <div class="test-card" role="article">
+          <div class="avatar" aria-hidden="true">PB</div>
+          <div>
+            <p><strong>“A Kallita renovou nossa marca e trouxe reconhecimento — atendimento impecável.”</strong></p>
+            <div class="small">— Padaria Bom Pão</div>
+          </div>
+          <div class="star" aria-hidden="true">★★★★★</div>
+        </div>
+
+        <!-- Testimonial 2 -->
+        <div class="test-card" role="article">
+          <div class="avatar" aria-hidden="true">SM</div>
+          <div>
+            <p><strong>“Criatividade e estratégia: nossas vendas subiram depois do rebranding.”</strong></p>
+            <div class="small">— Studio Bem</div>
+          </div>
+          <div class="star" aria-hidden="true">★★★★★</div>
+        </div>
+
+        <!-- Testimonial 3 -->
+        <div class="test-card" role="article">
+          <div class="avatar" aria-hidden="true">LR</div>
+          <div>
+            <p><strong>“Profissional dedicada, prazo cumprido e resultado lindo.”</strong></p>
+            <div class="small">— Loja Morada</div>
+          </div>
+          <div class="star" aria-hidden="true">★★★★☆</div>
+        </div>
+
+      </div>
+
+      <div class="center" style="margin-top:12px">
+        <button class="pill" onclick="prevTest()">◀</button>
+        <button class="pill" onclick="nextTest()">▶</button>
+      </div>
+    </section>
+
+    <!-- SERVICES / PACKAGES -->
+    <h2 class="section-title" id="servicos">Pacotes Personalizados</h2>
+    <div class="services-grid" aria-label="pacotes">
+
+      <div class="service-card" role="region" aria-label="Pacote Pro">
+        <h4>Pro</h4>
+        <p class="small">Ideal para quem está começando e precisa de identidade visual inicial + kit social.</p>
+        <ul style="margin:8px 0 0 16px;color:rgba(255,255,255,0.95)">
+          <li>Logotipo (variações)</li>
+          <li>Manual básico</li>
+          <li>3 templates para redes</li>
+          <li>1 Revisão</li>
+        </ul>
+        <div style="margin-top:auto"><strong class="small">A partir de R$ 1.500</strong></div>
+      </div>
+
+      <div class="service-card" role="region" aria-label="Pacote Premium">
+        <h4>Premium</h4>
+        <p class="small">Pacote completo com estratégia de marca e aplicações.</p>
+        <ul style="margin:8px 0 0 16px;color:rgba(255,255,255,0.95)">
+          <li>Direção de arte</li>
+          <li>Manual detalhado</li>
+          <li>Mockups e peças</li>
+          <li>Posts (pacote mensal)</li>
+        </ul>
+        <div style="margin-top:auto"><strong class="small">A partir de R$ 3.800</strong></div>
+      </div>
+
+      <div class="service-card" role="region" aria-label="Pacote Plus">
+        <h4>Plus</h4>
+        <p class="small">Acompanhamento e presença digital contínua.</p>
+        <ul style="margin:8px 0 0 16px;color:rgba(255,255,255,0.95)">
+          <li>Estratégia mensal</li>
+          <li>Criação de campanhas</li>
+          <li>Suporte prioritário</li>
+        </ul>
+        <div style="margin-top:auto"><strong class="small">A partir de R$ 2.400/mês</strong></div>
+      </div>
+
+    </div>
+
+    <!-- CONTACT -->
+    <h2 class="section-title" id="contato">Contato</h2>
+
+    <section class="contact" aria-label="contato e informações">
+      <div class="info">
+        <h3 class="muted">Contato & Info</h3>
+        <p>Pronta para transformar sua marca? Envie uma mensagem com seu briefing e eu respondo com o passo a passo.</p>
+
+        <p class="small"><strong>Localização</strong><br/>São Paulo, Brasil</p>
+        <p class="small"><strong>Telefone</strong><br/> +55 (11) 99999-999</p>
+        <p class="small"><strong>Email</strong><br/> seu.nome@mail.com</p>
+      </div>
+
+      <form onsubmit="submitForm(event)" aria-label="formulário de contato">
+        <input class="field" type="text" id="name" name="name" placeholder="Nome" required>
+        <input class="field" type="email" id="email" name="email" placeholder="Email" required>
+        <input class="field" type="text" id="subject" name="subject" placeholder="Assunto (ex: identidade visual)">
+        <textarea class="field" id="message" name="message" placeholder="Mensagem" rows="5" required></textarea>
+
+        <!-- Observação: GitHub Pages é estático. Para envio real, use Formspree, Netlify Forms, etc. -->
+        <button class="btn" type="submit">Enviar Mensagem</button>
+      </form>
+    </section>
+
+  </main>
+
+  <footer class="center" role="contentinfo">
+    <div style="max-width:1200px;margin:0 auto;padding:0 18px;">
+      <div style="display:flex;gap:20px;align-items:center;justify-content:space-between;flex-wrap:wrap">
+        <div style="font-family:'Baloo 2';font-size:20px;color:#fff">Kallita Design</div>
+        <div class="small">© <span id="year"></span> Kallita Design — Todos os direitos reservados</div>
       </div>
     </div>
-    <div class="project">
-      <img src="https://via.placeholder.com/520x360?text=Projeto+3" alt="Projeto 3">
-      <div class="project-info">
-        <h4>Essenza Beauty</h4>
-        <p class="muted">Design de embalagens</p>
-      </div>
-    </div>
-  </div>
-</section>
+  </footer>
 
-<!-- TESTIMONIALS -->
-<section id="testimonials">
-  <h2 class="section-title">Feedbacks</h2>
-  <p class="muted">O que meus clientes dizem</p>
-  <div class="testimonials">
-    <div class="test-card">
-      <div class="avatar"><img src="https://via.placeholder.com/120?text=J" alt="Joana"></div>
-      <div><strong>Joana</strong><small>"Meu negócio ganhou vida com a nova identidade. Atendimento impecável!"</small></div>
-    </div>
-    <div class="test-card">
-      <div class="avatar"><img src="https://via.placeholder.com/120?text=M" alt="Marcos"></div>
-      <div><strong>Marcos</strong><small>"Criatividade e sensibilidade visual incríveis. Recomendo demais!"</small></div>
-    </div>
-    <div class="test-card">
-      <div class="avatar"><img src="https://via.placeholder.com/120?text=L" alt="Laura"></div>
-      <div><strong>Laura</strong><small>"Fiquei encantada com o resultado. Superou minhas expectativas!"</small></div>
-    </div>
-  </div>
-</section>
+  <!-- SCRIPTS -->
+  <script>
+    // Ano no rodapé
+    document.getElementById('year').textContent = new Date().getFullYear();
 
-<!-- CONTACT -->
-<section id="contact">
-  <h2 class="section-title">Contato</h2>
-  <p class="muted">Entre em contato para orçamentos e parcerias</p>
-  <div class="contact-wrap">
-    <div class="contact-info">
-      <p><strong>Localização</strong><br>Rio Claro, São Paulo</p>
-      <p><strong>E-mail</strong><br><a href="mailto:akallitaprado@gmail.com">akallitaprado@gmail.com</a></p>
-      <p><strong>Telefone / WhatsApp</strong><br>+55 (19) 99900-95784</p>
-      <a class="whatsapp" href="https://wa.me/55199990095784" target="_blank">💬 Falar no WhatsApp</a>
-    </div>
-    <form onsubmit="event.preventDefault(); alert('Formulário de exemplo — configure envio real no backend');">
-      <input type="text" placeholder="Seu nome" required>
-      <input type="email" placeholder="Seu e-mail" required>
-      <textarea rows="6" placeholder="Mensagem" required></textarea>
-      <div style="text-align:right;"><button class="btn">Enviar</button></div>
-    </form>
-  </div>
-</section>
+    // MOBILE MENU
+    const hambtn = document.getElementById('hambtn');
+    hambtn && hambtn.addEventListener('click', () => {
+      const m = document.querySelector('.menu');
+      if(!m) return;
+      if(getComputedStyle(m).display === 'none') {
+        m.style.display = 'flex';
+        m.style.position = 'absolute';
+        m.style.right = '18px';
+        m.style.top = '74px';
+        m.style.flexDirection = 'column';
+        m.style.background = 'rgba(255,255,255,0.98)';
+        m.style.padding = '12px';
+        m.style.borderRadius = '12px';
+        m.style.boxShadow = '0 12px 30px rgba(0,0,0,0.09)';
+      } else {
+        m.style.display = 'none';
+      }
+    });
 
-<!-- FOOTER -->
-<footer>
-  <div class="footer-inner container">
-    <p>© 2025 Kállita Design — Todos os direitos reservados</p>
-    <a href="https://wa.me/55199990095784" class="whatsapp">💬 WhatsApp</a>
-  </div>
-</footer>
+    // CAROUSEL TESTEMUNHOS (simples)
+    let currentTest = 0;
+    const tests = Array.from(document.querySelectorAll('#testWrap .test-card'));
+    function showTest(index){
+      tests.forEach((t,i)=> {
+        t.style.display = (i === index) ? 'flex' : 'none';
+      });
+    }
+    function nextTest(){
+      currentTest = (currentTest + 1) % tests.length;
+      showTest(currentTest);
+    }
+    function prevTest(){
+      currentTest = (currentTest - 1 + tests.length) % tests.length;
+      showTest(currentTest);
+    }
+    if(tests.length) {
+      showTest(0);
+      setInterval(nextTest, 6000); // auto-rotate
+    }
+
+    // VIEW ALL portfolio (placeholder)
+    function viewAll(){
+      alert('Substitua este botão por link para a página de portfólio completo.');
+    }
+
+    // FORM: simulação de envio
+    function submitForm(e){
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      alert('Obrigado, ' + name + '! Sua mensagem foi recebida (simulação).\\nEmail: ' + email);
+      e.target.reset();
+    }
+
+    // Ajuste do menu no resize
+    window.addEventListener('resize', () => {
+      const m = document.querySelector('.menu');
+      if(!m) return;
+      if(window.innerWidth > 680){
+        m.style.display = 'flex';
+        m.style.position = '';
+        m.style.top = '';
+        m.style.right = '';
+        m.style.flexDirection = '';
+        m.style.background = '';
+        m.style.padding = '';
+        m.style.borderRadius = '';
+        m.style.boxShadow = '';
+      } else {
+        m.style.display = 'none';
+      }
+    });
+  </script>
 
 </body>
 </html>
