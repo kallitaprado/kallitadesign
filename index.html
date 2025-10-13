@@ -1,364 +1,227 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kállita Design — Portfólio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-  <style>
-    :root{
-      --red-dark: #7b1113;
-      --beige: #f5e9da;
-      --muted: #c4b5a4;
-      --black: #111;
-      --gray: #2b2b2b;
-    }
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Kállita Design — Portfólio</title>
 
-    *{box-sizing:border-box;margin:0;padding:0}
-    body{
-      font-family:'Poppins',sans-serif;
-      background:var(--black);
-      color:var(--beige);
-      overflow-x:hidden;
-    }
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-    /* HEADER */
-    header{
-      position:fixed;
-      top:0; left:0;
-      width:100%;
-      padding:16px 60px;
-      background:rgba(17,17,17,0.85);
-      backdrop-filter:blur(8px);
-      display:flex;
-      justify-content:center;
-      z-index:999;
-      border-bottom:1px solid rgba(255,255,255,0.06);
-    }
-    nav{
-      display:flex;
-      gap:36px;
-      align-items:center;
-    }
-    nav a{
-      text-decoration:none;
-      color:var(--beige);
-      font-weight:500;
-      transition:color .3s ease;
-    }
-    nav a:hover{color:var(--muted)}
-    .cta-contact{
-      background:var(--red-dark);
-      padding:8px 18px;
-      border-radius:20px;
-      color:#fff;
-      font-weight:600;
-      transition:background .3s ease;
-    }
-    .cta-contact:hover{background:#8b191b}
+<style>
+  :root{
+    --red-dark:#6b0f0f;
+    --black:#0b0b0b;
+    --beige:#f6e7d2;
+    --muted:#bdb0a4;
+    --radius-lg:28px;
+    --maxw:1200px;
+  }
 
-    /* HERO */
-    .hero{
-      min-height:100vh;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      background:linear-gradient(135deg, #460000 0%, #7b1113 70%, #3a0000 100%);
-      color:var(--beige);
-      padding:100px 60px 80px;
-    }
-    .hero-inner{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      align-items:center;
-      gap:40px;
-      max-width:1200px;
-      width:100%;
-    }
-    .hero h1{
-      font-family:'Playfair Display',serif;
-      font-size:56px;
-      line-height:1.1;
-      margin-bottom:20px;
-      animation:fadeInUp 1s ease forwards;
-    }
-    .hero p{
-      font-size:18px;
-      line-height:1.6;
-      color:rgba(246,231,210,0.9);
-      margin-bottom:28px;
-      animation:fadeInUp 1.2s ease forwards;
-    }
-    .hero .btn-cta{
-      display:inline-block;
-      background:var(--beige);
-      color:var(--black);
-      padding:14px 28px;
-      border-radius:28px;
-      font-weight:700;
-      transition:all .3s ease;
-      box-shadow:0 6px 20px rgba(0,0,0,0.3);
-    }
-    .hero .btn-cta:hover{
-      background:var(--muted);
-      transform:translateY(-3px);
-    }
-    .hero-img img{
-      width:100%;
-      height:500px;
-      object-fit:cover;
-      border-radius:20px;
-      transform:scale(1);
-      transition:transform .8s ease;
-      box-shadow:0 10px 30px rgba(0,0,0,0.4);
-    }
-    .hero-img img:hover{transform:scale(1.05)}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Inter',sans-serif;background:var(--black);color:var(--beige);line-height:1.5;-webkit-font-smoothing:antialiased;}
+  a{text-decoration:none;color:inherit;transition:0.3s;}
+  img{max-width:100%;display:block;}
+  .container{max-width:var(--maxw);margin:0 auto;padding:0 20px;}
 
-    /* ANIMAÇÕES */
-    @keyframes fadeInUp {
-      0%{opacity:0;transform:translateY(30px);}
-      100%{opacity:1;transform:translateY(0);}
-    }
+  /* HEADER */
+  header{position:sticky;top:0;z-index:10;background:rgba(11,11,11,0.95);backdrop-filter:blur(4px);}
+  .header-inner{display:flex;align-items:center;justify-content:space-between;height:74px;}
+  .logo img{height:40px;}
+  nav{display:flex;gap:20px;}
+  nav a{padding:8px 12px;border-radius:12px;font-weight:500;}
+  nav a:hover{background:rgba(255,255,255,0.05);}
+  .cta{background:var(--red-dark);color:var(--beige);padding:8px 14px;border-radius:20px;font-weight:700;}
 
-    /* CONTAINER */
-    .container{
-      max-width:1200px;
-      margin:0 auto;
-      padding:80px 60px;
-    }
-    h2.section-title{
-      text-align:center;
-      font-family:'Playfair Display',serif;
-      font-size:36px;
-      margin-bottom:40px;
-      color:var(--beige);
-    }
+  /* HERO */
+  .hero{background:var(--red-dark);padding:90px 0;text-align:center;}
+  .hero h1{font-family:'Playfair Display',serif;font-size:44px;margin-bottom:16px;}
+  .hero p{max-width:640px;margin:0 auto 28px;color:rgba(255,255,255,0.85);}
+  .hero .btn{background:var(--beige);color:var(--black);padding:12px 24px;border-radius:24px;font-weight:700;}
 
-    /* SERVICES */
-    .services-grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-      gap:24px;
-    }
-    .service-card{
-      background:rgba(255,255,255,0.02);
-      border:1px solid rgba(255,255,255,0.08);
-      border-radius:16px;
-      padding:24px;
-      transition:all .3s ease;
-      position:relative;
-    }
-    .service-card:hover{
-      transform:translateY(-6px);
-      box-shadow:0 8px 20px rgba(0,0,0,0.4);
-      border-color:rgba(255,255,255,0.12);
-    }
-    .service-card h4{
-      font-family:'Playfair Display',serif;
-      margin-bottom:8px;
-    }
+  /* ABOUT */
+  section{padding:80px 20px;}
+  .section-title{text-align:center;font-family:'Playfair Display',serif;font-size:28px;margin-bottom:10px;}
+  .muted{text-align:center;color:var(--muted);margin-bottom:40px;}
+  .about{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;}
+  .about img{border-radius:24px;}
+  .about p{color:var(--muted);margin-bottom:12px;}
 
-    /* PORTFOLIO */
-    .portfolio-grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-      gap:24px;
-    }
-    .project{
-      border-radius:14px;
-      overflow:hidden;
-      background:rgba(255,255,255,0.02);
-      transition:transform .3s ease, box-shadow .3s ease;
-    }
-    .project:hover{
-      transform:translateY(-6px);
-      box-shadow:0 8px 24px rgba(0,0,0,0.4);
-    }
-    .project img{
-      width:100%;
-      height:220px;
-      object-fit:cover;
-      transition:transform .5s ease;
-    }
-    .project:hover img{transform:scale(1.05)}
-    .project-content{
-      padding:18px;
-    }
-    .btn-view{
-      display:inline-block;
-      margin-top:8px;
-      background:var(--red-dark);
-      color:var(--beige);
-      padding:8px 16px;
-      border-radius:20px;
-      font-weight:600;
-      font-size:14px;
-      transition:background .3s ease;
-    }
-    .btn-view:hover{background:#811414}
+  /* SERVICES */
+  .services{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;text-align:center;}
+  .service-card{border:1px solid rgba(255,255,255,0.06);border-radius:20px;padding:24px;}
+  .service-card h4{font-family:'Playfair Display',serif;margin-bottom:8px;}
 
-    /* FOOTER */
-    footer{
-      background:var(--gray);
-      padding:40px 20px;
-      text-align:center;
-      color:var(--muted);
-      font-size:14px;
-      position:relative;
-    }
-    .footer-links{
-      margin-bottom:16px;
-    }
-    .footer-links a{
-      margin:0 10px;
-      color:var(--beige);
-      text-decoration:none;
-      font-weight:500;
-      transition:color .3s ease;
-    }
-    .footer-links a:hover{color:var(--muted)}
-    .socials{
-      margin-bottom:10px;
-    }
-    .socials a{
-      margin:0 8px;
-      color:var(--beige);
-      font-size:20px;
-      text-decoration:none;
-      transition:opacity .3s ease;
-    }
-    .socials a:hover{opacity:0.7}
+  /* PORTFOLIO */
+  .portfolio{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;text-align:left;}
+  .project{background:rgba(255,255,255,0.03);border-radius:12px;overflow:hidden;}
+  .project img{height:220px;object-fit:cover;width:100%;}
+  .project-info{padding:14px;}
+  .project-info h4{font-family:'Playfair Display',serif;margin-bottom:4px;}
 
-    /* BOTÃO WHATSAPP */
-    .whatsapp-btn{
-      position:fixed;
-      bottom:20px;
-      right:20px;
-      background:#25D366;
-      color:#fff;
-      border-radius:50%;
-      width:60px;
-      height:60px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-size:28px;
-      box-shadow:0 6px 20px rgba(0,0,0,0.3);
-      z-index:999;
-      transition:transform .3s ease;
-    }
-    .whatsapp-btn:hover{
-      transform:scale(1.1);
-    }
+  /* TESTIMONIALS */
+  .testimonials{display:flex;flex-direction:column;gap:16px;max-width:800px;margin:0 auto;}
+  .test-card{border:1px solid rgba(255,255,255,0.06);border-radius:24px;padding:16px;display:flex;gap:14px;align-items:center;}
+  .test-card .avatar{width:60px;height:60px;border-radius:50%;overflow:hidden;}
+  .test-card small{color:var(--muted);display:block;margin-top:4px;}
 
-    @media(max-width:760px){
-      .hero-inner{grid-template-columns:1fr;gap:20px;text-align:center}
-      .hero h1{font-size:42px}
-      .hero p{font-size:16px}
-    }
-  </style>
+  /* CONTACT */
+  .contact-wrap{background:var(--beige);color:var(--black);border-radius:26px;padding:32px;max-width:900px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+  .contact-wrap input,.contact-wrap textarea{width:100%;padding:10px;border:1px solid rgba(0,0,0,0.1);border-radius:8px;margin-bottom:10px;}
+  .contact-wrap .btn{background:var(--red-dark);color:var(--beige);padding:10px 16px;border-radius:20px;font-weight:700;}
+  .contact-info p{margin-bottom:10px;}
+
+  /* FOOTER */
+  footer{background:var(--red-dark);padding:24px 0;color:var(--beige);}
+  .footer-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;}
+  .footer-inner a{color:var(--beige);font-weight:500;}
+  .whatsapp{background:var(--red-dark);padding:10px 16px;border-radius:24px;display:inline-flex;align-items:center;gap:8px;font-weight:700;}
+
+  /* RESPONSIVE */
+  @media(max-width:900px){
+    .about{grid-template-columns:1fr;text-align:center;}
+    .services{grid-template-columns:1fr;}
+    .portfolio{grid-template-columns:1fr;}
+    .contact-wrap{grid-template-columns:1fr;}
+    nav{display:none;}
+  }
+</style>
 </head>
 <body>
 
-  <!-- HEADER -->
-  <header>
+<!-- HEADER -->
+<header>
+  <div class="header-inner container">
+    <div class="logo">
+      <img src="https://i.imgur.com/cLgRexT.png" alt="Kállita Design">
+    </div>
     <nav>
       <a href="#home">Home</a>
+      <a href="#about">Sobre</a>
       <a href="#services">Serviços</a>
       <a href="#portfolio">Portfólio</a>
-      <a href="#contact" class="cta-contact">Contato</a>
+      <a href="#contact" class="cta">Contato</a>
     </nav>
-  </header>
+  </div>
+</header>
 
-  <!-- HERO -->
-  <section id="home" class="hero">
-    <div class="hero-inner">
-      <div>
-        <h1 data-aos="fade-up">Kállita Design</h1>
-        <p data-aos="fade-up" data-aos-delay="150">
-          Criação de identidades visuais e design estratégico para marcas que desejam se destacar com autenticidade.
-        </p>
-        <a class="btn-cta" href="#portfolio" data-aos="fade-up" data-aos-delay="250">Ver Projetos</a>
-      </div>
-      <div class="hero-img" data-aos="fade-left">
-        <img src="https://via.placeholder.com/800x500?text=Kállita+Design+Banner" alt="Banner Principal">
+<!-- HERO -->
+<section id="home" class="hero">
+  <h1>Criação de Identidades Visuais e Branding Exclusivo</h1>
+  <p>Transformo ideias em marcas memoráveis — com propósito, estética e autenticidade.</p>
+  <a href="#portfolio" class="btn">Ver Portfólio</a>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <h2 class="section-title">Sobre Mim</h2>
+  <p class="muted">Conheça um pouco do meu trabalho e trajetória</p>
+  <div class="about container">
+    <img src="https://via.placeholder.com/500x360?text=K%C3%A1llita+Design" alt="Sobre Kállita">
+    <div>
+      <p>Sou designer especializada em identidade visual e branding, com foco em conectar estética, propósito e estratégia para marcas que desejam se destacar no mercado.</p>
+      <p>Com criatividade e atenção aos detalhes, desenvolvo projetos únicos que traduzem a essência de cada cliente.</p>
+      <a href="#contact" class="cta">Fale Comigo</a>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <h2 class="section-title">Serviços</h2>
+  <p class="muted">Soluções completas para sua marca</p>
+  <div class="services container">
+    <div class="service-card">
+      <h4>Identidade Visual</h4>
+      <p>Criação de logotipo, paleta de cores, tipografia e elementos que comunicam a essência da sua marca.</p>
+    </div>
+    <div class="service-card">
+      <h4>Branding</h4>
+      <p>Estratégia de posicionamento, valores e personalidade de marca para conectar com o público certo.</p>
+    </div>
+    <div class="service-card">
+      <h4>Social Media</h4>
+      <p>Design e planejamento visual para redes sociais, garantindo consistência e reconhecimento.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section id="portfolio">
+  <h2 class="section-title">Últimos Projetos</h2>
+  <p class="muted">Alguns trabalhos recentes desenvolvidos com carinho</p>
+  <div class="portfolio container">
+    <div class="project">
+      <img src="https://via.placeholder.com/520x360?text=Projeto+1" alt="Projeto 1">
+      <div class="project-info">
+        <h4>Marca Aurora</h4>
+        <p class="muted">Identidade visual minimalista</p>
       </div>
     </div>
-  </section>
-
-  <!-- SERVICES -->
-  <section id="services" class="container">
-    <h2 class="section-title" data-aos="fade-up">Serviços</h2>
-    <div class="services-grid">
-      <div class="service-card" data-aos="fade-up" data-aos-delay="100">
-        <h4>Identidade Visual</h4>
-        <p>Desenvolvimento de logotipos e sistemas visuais alinhados à essência da sua marca.</p>
-      </div>
-      <div class="service-card" data-aos="fade-up" data-aos-delay="200">
-        <h4>Design para Mídias Sociais</h4>
-        <p>Artes profissionais e criativas para Instagram e campanhas digitais.</p>
-      </div>
-      <div class="service-card" data-aos="fade-up" data-aos-delay="300">
-        <h4>Branding Estratégico</h4>
-        <p>Posicionamento visual e comunicação consistente para sua marca.</p>
+    <div class="project">
+      <img src="https://via.placeholder.com/520x360?text=Projeto+2" alt="Projeto 2">
+      <div class="project-info">
+        <h4>Studio Luna</h4>
+        <p class="muted">Rebranding completo</p>
       </div>
     </div>
-  </section>
-
-  <!-- PORTFOLIO -->
-  <section id="portfolio" class="container">
-    <h2 class="section-title" data-aos="fade-up">Últimos Projetos</h2>
-    <div class="portfolio-grid">
-      <div class="project" data-aos="fade-up" data-aos-delay="100">
-        <img src="https://via.placeholder.com/520x360?text=Projeto+1" alt="Projeto 1">
-        <div class="project-content">
-          <h4>Marca Aurora</h4>
-          <p>Identidade visual minimalista e elegante.</p>
-          <a class="btn-view" href="#">Ver Mais</a>
-        </div>
-      </div>
-      <div class="project" data-aos="fade-up" data-aos-delay="200">
-        <img src="https://via.placeholder.com/520x360?text=Projeto+2" alt="Projeto 2">
-        <div class="project-content">
-          <h4>Studio La Vita</h4>
-          <p>Design orgânico e branding feminino.</p>
-          <a class="btn-view" href="#">Ver Mais</a>
-        </div>
-      </div>
-      <div class="project" data-aos="fade-up" data-aos-delay="300">
-        <img src="https://via.placeholder.com/520x360?text=Projeto+3" alt="Projeto 3">
-        <div class="project-content">
-          <h4>Essenza</h4>
-          <p>Criação de marca premium e paleta emocional.</p>
-          <a class="btn-view" href="#">Ver Mais</a>
-        </div>
+    <div class="project">
+      <img src="https://via.placeholder.com/520x360?text=Projeto+3" alt="Projeto 3">
+      <div class="project-info">
+        <h4>Essenza Beauty</h4>
+        <p class="muted">Design de embalagens</p>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- FOOTER -->
-  <footer id="contact">
-    <div class="socials">
-      <a href="https://instagram.com/seu_perfil" target="_blank">📷</a>
-      <a href="https://behance.net/seu_portfolio" target="_blank">🎨</a>
-      <a href="mailto:contato@kallitadesign.com">✉️</a>
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <h2 class="section-title">Feedbacks</h2>
+  <p class="muted">O que meus clientes dizem</p>
+  <div class="testimonials">
+    <div class="test-card">
+      <div class="avatar"><img src="https://via.placeholder.com/120?text=J" alt="Joana"></div>
+      <div><strong>Joana</strong><small>"Meu negócio ganhou vida com a nova identidade. Atendimento impecável!"</small></div>
     </div>
-    <div class="footer-links">
-      <a href="#home">Home</a> |
-      <a href="#services">Serviços</a> |
-      <a href="#portfolio">Portfólio</a> |
-      <a href="#contact">Contato</a>
+    <div class="test-card">
+      <div class="avatar"><img src="https://via.placeholder.com/120?text=M" alt="Marcos"></div>
+      <div><strong>Marcos</strong><small>"Criatividade e sensibilidade visual incríveis. Recomendo demais!"</small></div>
     </div>
-    <p>© 2025 Kállita Design — Todos os direitos reservados.</p>
-  </footer>
+    <div class="test-card">
+      <div class="avatar"><img src="https://via.placeholder.com/120?text=L" alt="Laura"></div>
+      <div><strong>Laura</strong><small>"Fiquei encantada com o resultado. Superou minhas expectativas!"</small></div>
+    </div>
+  </div>
+</section>
 
-  <!-- BOTÃO WHATSAPP -->
-  <a href="https://wa.me/5599999999999" target="_blank" class="whatsapp-btn">💬</a>
+<!-- CONTACT -->
+<section id="contact">
+  <h2 class="section-title">Contato</h2>
+  <p class="muted">Entre em contato para orçamentos e parcerias</p>
+  <div class="contact-wrap">
+    <div class="contact-info">
+      <p><strong>Localização</strong><br>Rio Claro, São Paulo</p>
+      <p><strong>E-mail</strong><br><a href="mailto:akallitaprado@gmail.com">akallitaprado@gmail.com</a></p>
+      <p><strong>Telefone / WhatsApp</strong><br>+55 (19) 99900-95784</p>
+      <a class="whatsapp" href="https://wa.me/55199990095784" target="_blank">💬 Falar no WhatsApp</a>
+    </div>
+    <form onsubmit="event.preventDefault(); alert('Formulário de exemplo — configure envio real no backend');">
+      <input type="text" placeholder="Seu nome" required>
+      <input type="email" placeholder="Seu e-mail" required>
+      <textarea rows="6" placeholder="Mensagem" required></textarea>
+      <div style="text-align:right;"><button class="btn">Enviar</button></div>
+    </form>
+  </div>
+</section>
 
-  <!-- AOS SCRIPT -->
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script>AOS.init({duration:900, once:true});</script>
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner container">
+    <p>© 2025 Kállita Design — Todos os direitos reservados</p>
+    <a href="https://wa.me/55199990095784" class="whatsapp">💬 WhatsApp</a>
+  </div>
+</footer>
 
 </body>
 </html>
