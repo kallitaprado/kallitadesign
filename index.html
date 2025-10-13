@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kállita Design — Portfólio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <style>
+    :root{
+      --red-dark: #7b1113;
+      --beige: #f5e9da;
+      --muted: #c4b5a4;
+      --black: #111;
+      --gray: #2b2b2b;
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      font-family:'Poppins',sans-serif;
+      background:var(--black);
+      color:var(--beige);
+      overflow-x:hidden;
+    }
+
+    /* HEADER */
+    header{
+      position:fixed;
+      top:0; left:0;
+      width:100%;
+      padding:16px 60px;
+      background:rgba(17,17,17,0.85);
+      backdrop-filter:blur(8px);
+      display:flex;
+      justify-content:center;
+      z-index:999;
+      border-bottom:1px solid rgba(255,255,255,0.06);
+    }
+    nav{
+      display:flex;
+      gap:36px;
+      align-items:center;
+    }
+    nav a{
+      text-decoration:none;
+      color:var(--beige);
+      font-weight:500;
+      transition:color .3s ease;
+    }
+    nav a:hover{color:var(--muted)}
+    .cta-contact{
+      background:var(--red-dark);
+      padding:8px 18px;
+      border-radius:20px;
+      color:#fff;
+      font-weight:600;
+      transition:background .3s ease;
+    }
+    .cta-contact:hover{background:#8b191b}
+
+    /* HERO */
+    .hero{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:linear-gradient(135deg, #460000 0%, #7b1113 70%, #3a0000 100%);
+      color:var(--beige);
+      padding:100px 60px 80px;
+    }
+    .hero-inner{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      align-items:center;
+      gap:40px;
+      max-width:1200px;
+      width:100%;
+    }
+    .hero h1{
+      font-family:'Playfair Display',serif;
+      font-size:56px;
+      line-height:1.1;
+      margin-bottom:20px;
+      animation:fadeInUp 1s ease forwards;
+    }
+    .hero p{
+      font-size:18px;
+      line-height:1.6;
+      color:rgba(246,231,210,0.9);
+      margin-bottom:28px;
+      animation:fadeInUp 1.2s ease forwards;
+    }
+    .hero .btn-cta{
+      display:inline-block;
+      background:var(--beige);
+      color:var(--black);
+      padding:14px 28px;
+      border-radius:28px;
+      font-weight:700;
+      transition:all .3s ease;
+      box-shadow:0 6px 20px rgba(0,0,0,0.3);
+    }
+    .hero .btn-cta:hover{
+      background:var(--muted);
+      transform:translateY(-3px);
+    }
+    .hero-img img{
+      width:100%;
+      height:500px;
+      object-fit:cover;
+      border-radius:20px;
+      transform:scale(1);
+      transition:transform .8s ease;
+      box-shadow:0 10px 30px rgba(0,0,0,0.4);
+    }
+    .hero-img img:hover{transform:scale(1.05)}
+
+    /* ANIMAÇÕES */
+    @keyframes fadeInUp {
+      0%{opacity:0;transform:translateY(30px);}
+      100%{opacity:1;transform:translateY(0);}
+    }
+
+    /* CONTAINER */
+    .container{
+      max-width:1200px;
+      margin:0 auto;
+      padding:80px 60px;
+    }
+    h2.section-title{
+      text-align:center;
+      font-family:'Playfair Display',serif;
+      font-size:36px;
+      margin-bottom:40px;
+      color:var(--beige);
+    }
+
+    /* SERVICES */
+    .services-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+      gap:24px;
+    }
+    .service-card{
+      background:rgba(255,255,255,0.02);
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:16px;
+      padding:24px;
+      transition:all .3s ease;
+      position:relative;
+    }
+    .service-card:hover{
+      transform:translateY(-6px);
+      box-shadow:0 8px 20px rgba(0,0,0,0.4);
+      border-color:rgba(255,255,255,0.12);
+    }
+    .service-card h4{
+      font-family:'Playfair Display',serif;
+      margin-bottom:8px;
+    }
+
+    /* PORTFOLIO */
+    .portfolio-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+      gap:24px;
+    }
+    .project{
+      border-radius:14px;
+      overflow:hidden;
+      background:rgba(255,255,255,0.02);
+      transition:transform .3s ease, box-shadow .3s ease;
+    }
+    .project:hover{
+      transform:translateY(-6px);
+      box-shadow:0 8px 24px rgba(0,0,0,0.4);
+    }
+    .project img{
+      width:100%;
+      height:220px;
+      object-fit:cover;
+      transition:transform .5s ease;
+    }
+    .project:hover img{transform:scale(1.05)}
+    .project-content{
+      padding:18px;
+    }
+    .btn-view{
+      display:inline-block;
+      margin-top:8px;
+      background:var(--red-dark);
+      color:var(--beige);
+      padding:8px 16px;
+      border-radius:20px;
+      font-weight:600;
+      font-size:14px;
+      transition:background .3s ease;
+    }
+    .btn-view:hover{background:#811414}
+
+    /* FOOTER */
+    footer{
+      background:var(--gray);
+      padding:40px 20px;
+      text-align:center;
+      color:var(--muted);
+      font-size:14px;
+      position:relative;
+    }
+    .footer-links{
+      margin-bottom:16px;
+    }
+    .footer-links a{
+      margin:0 10px;
+      color:var(--beige);
+      text-decoration:none;
+      font-weight:500;
+      transition:color .3s ease;
+    }
+    .footer-links a:hover{color:var(--muted)}
+    .socials{
+      margin-bottom:10px;
+    }
+    .socials a{
+      margin:0 8px;
+      color:var(--beige);
+      font-size:20px;
+      text-decoration:none;
+      transition:opacity .3s ease;
+    }
+    .socials a:hover{opacity:0.7}
+
+    /* BOTÃO WHATSAPP */
+    .whatsapp-btn{
+      position:fixed;
+      bottom:20px;
+      right:20px;
+      background:#25D366;
+      color:#fff;
+      border-radius:50%;
+      width:60px;
+      height:60px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:28px;
+      box-shadow:0 6px 20px rgba(0,0,0,0.3);
+      z-index:999;
+      transition:transform .3s ease;
+    }
+    .whatsapp-btn:hover{
+      transform:scale(1.1);
+    }
+
+    @media(max-width:760px){
+      .hero-inner{grid-template-columns:1fr;gap:20px;text-align:center}
+      .hero h1{font-size:42px}
+      .hero p{font-size:16px}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#services">Serviços</a>
+      <a href="#portfolio">Portfólio</a>
+      <a href="#contact" class="cta-contact">Contato</a>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section id="home" class="hero">
+    <div class="hero-inner">
+      <div>
+        <h1 data-aos="fade-up">Kállita Design</h1>
+        <p data-aos="fade-up" data-aos-delay="150">
+          Criação de identidades visuais e design estratégico para marcas que desejam se destacar com autenticidade.
+        </p>
+        <a class="btn-cta" href="#portfolio" data-aos="fade-up" data-aos-delay="250">Ver Projetos</a>
+      </div>
+      <div class="hero-img" data-aos="fade-left">
+        <img src="https://via.placeholder.com/800x500?text=Kállita+Design+Banner" alt="Banner Principal">
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services" class="container">
+    <h2 class="section-title" data-aos="fade-up">Serviços</h2>
+    <div class="services-grid">
+      <div class="service-card" data-aos="fade-up" data-aos-delay="100">
+        <h4>Identidade Visual</h4>
+        <p>Desenvolvimento de logotipos e sistemas visuais alinhados à essência da sua marca.</p>
+      </div>
+      <div class="service-card" data-aos="fade-up" data-aos-delay="200">
+        <h4>Design para Mídias Sociais</h4>
+        <p>Artes profissionais e criativas para Instagram e campanhas digitais.</p>
+      </div>
+      <div class="service-card" data-aos="fade-up" data-aos-delay="300">
+        <h4>Branding Estratégico</h4>
+        <p>Posicionamento visual e comunicação consistente para sua marca.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PORTFOLIO -->
+  <section id="portfolio" class="container">
+    <h2 class="section-title" data-aos="fade-up">Últimos Projetos</h2>
+    <div class="portfolio-grid">
+      <div class="project" data-aos="fade-up" data-aos-delay="100">
+        <img src="https://via.placeholder.com/520x360?text=Projeto+1" alt="Projeto 1">
+        <div class="project-content">
+          <h4>Marca Aurora</h4>
+          <p>Identidade visual minimalista e elegante.</p>
+          <a class="btn-view" href="#">Ver Mais</a>
+        </div>
+      </div>
+      <div class="project" data-aos="fade-up" data-aos-delay="200">
+        <img src="https://via.placeholder.com/520x360?text=Projeto+2" alt="Projeto 2">
+        <div class="project-content">
+          <h4>Studio La Vita</h4>
+          <p>Design orgânico e branding feminino.</p>
+          <a class="btn-view" href="#">Ver Mais</a>
+        </div>
+      </div>
+      <div class="project" data-aos="fade-up" data-aos-delay="300">
+        <img src="https://via.placeholder.com/520x360?text=Projeto+3" alt="Projeto 3">
+        <div class="project-content">
+          <h4>Essenza</h4>
+          <p>Criação de marca premium e paleta emocional.</p>
+          <a class="btn-view" href="#">Ver Mais</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="contact">
+    <div class="socials">
+      <a href="https://instagram.com/seu_perfil" target="_blank">📷</a>
+      <a href="https://behance.net/seu_portfolio" target="_blank">🎨</a>
+      <a href="mailto:contato@kallitadesign.com">✉️</a>
+    </div>
+    <div class="footer-links">
+      <a href="#home">Home</a> |
+      <a href="#services">Serviços</a> |
+      <a href="#portfolio">Portfólio</a> |
+      <a href="#contact">Contato</a>
+    </div>
+    <p>© 2025 Kállita Design — Todos os direitos reservados.</p>
+  </footer>
+
+  <!-- BOTÃO WHATSAPP -->
+  <a href="https://wa.me/5599999999999" target="_blank" class="whatsapp-btn">💬</a>
+
+  <!-- AOS SCRIPT -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>AOS.init({duration:900, once:true});</script>
+
+</body>
+</html>
