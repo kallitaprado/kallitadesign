@@ -3,839 +3,576 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Kállita Design — Portfólio</title>
+  <title>Kallita Design — Portfólio</title>
 
+  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
   <style>
-    /* =========================
-       VARIÁVEIS DE CORES & RESET
-       ========================= */
     :root{
       --bg: #fbeee6;            /* fundo bege */
-      --hero: #f05652;          /* vermelho coral (hero) */
-      --plate: #7bb268;         /* faixa verde */
-      --accent-yellow: #f5b700; /* amarelo nav */
-      --accent-teal: #28d0a0;   /* verde água */
-      --button: #ff6b5c;        /* botão principal */
+      --hero: #f05652;          /* rosa coral / destaque */
+      --plate: #7bb268;         /* faixa verde (métricas) */
+      --brown: #5b4036;         /* marrom escuro para portfólio */
+      --accent-yellow: #f5b700;
+      --accent-teal: #28d0a0;
+      --button: #ff6b5c;
       --text: #3b2a2a;
       --muted: #a87f70;
-      --card: #ff6b63;          /* cards de serviço - tom coral */
+      --card: #ff6b63;
       --white: #fff;
-      --shadow: 0 8px 20px rgba(18,18,18,0.08);
-      --radius-lg: 22px;
-      /* NOVA VARIÁVEL: Cor dos projetos (Portfólio) */
-      --project-color: #F74F4F;
+      --shadow: 0 10px 30px rgba(18,18,18,0.08);
+      --radius-lg: 18px;
     }
 
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
       margin:0;
-      font-family:"Poppins",system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      font-family:"Poppins",system-ui,-apple-system,"Segoe UI",Roboto,Arial;
       background:var(--bg);
       color:var(--text);
       -webkit-font-smoothing:antialiased;
       -moz-osx-font-smoothing:grayscale;
       line-height:1.5;
     }
-
     a{color:inherit;text-decoration:none}
     img{max-width:100%;height:auto;display:block}
 
-    /* ===========================
-       HEADER / NAV / WHATSAPP
-       =========================== */
-    .topbar{
-      /* Centralizando o conteúdo do header */
-      display:flex;
-      justify-content:center;
-      padding:18px 24px;
-      gap:18px;
-      background:#FDE3D5;
-      align-items:center;
-      position:sticky;
+    /* ===== HEADER ===== */
+    header.site-header{
+      position:fixed;
       top:0;
-      z-index:40;
+      left:0;
+      right:0;
+      z-index:80;
+      background:rgba(255,255,255,0.92);
+      backdrop-filter: blur(4px);
+      box-shadow:0 6px 18px rgba(10,10,10,0.04);
     }
-
-    .nav{
-      display:flex;
-      gap:12px;
-      align-items:center;
-      max-width:1100px;
-      width:100%;
-      padding:0 12px;
-    }
-    .logo{
+    .container{
+      max-width:1200px;
+      margin:0 auto;
+      padding:12px 18px;
       display:flex;
       align-items:center;
       gap:12px;
-      margin-right:auto;
-      /* Ajuste para o header ser mais responsivo/extendido */
-      flex-grow:1;
-      max-width:100%;
       justify-content:space-between;
     }
-    .logo-brand{
+
+    /* logo left */
+    .logo-wrap{
       display:flex;
       align-items:center;
       gap:12px;
+      min-width:180px; /* garante espaço para logo no mobile */
     }
-    .brand{
-      font-family:"Baloo 2";
-      font-size:42px;
-      color:var(--hero);
-      letter-spacing:1px;
-      transform:translateY(-2px);
+    .logo-placeholder{
+      width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,var(--hero),#ffd6cf);
+      display:flex;align-items:center;justify-content:center;color:var(--white);font-weight:700;font-family:"Baloo 2";
+      box-shadow:var(--shadow);
     }
+    .brand-text{
+      display:flex;flex-direction:column;
+    }
+    .brand-title{ font-family:"Baloo 2"; font-size:18px; color:var(--hero); line-height:1; }
+    .brand-sub{ font-size:12px; color:var(--muted); margin-top:2px }
 
-    /* MENU CENTRALIZADO: Usando flexbox no .nav e auto margins */
-    .menu{
+    /* nav centered */
+    nav.main-nav{
       display:flex;
-      gap:14px;
       align-items:center;
-      /* Centraliza o menu no espaço restante */
-      margin-left:auto;
-      margin-right:auto;
+      justify-content:center;
+      flex:1;
     }
-    .menu a{
-      padding:8px 16px;
-      border-radius:20px;
+    .nav-list{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      justify-content:center;
+      flex-wrap:wrap;
+    }
+    .nav-list a{
+      padding:8px 14px;
+      border-radius:999px;
       font-weight:600;
       font-size:14px;
+      transition:transform .18s ease, box-shadow .18s ease;
+      color:var(--text);
+      background:transparent;
     }
-    .menu a:nth-child(1){ background:var(--accent-yellow); color:#4a2b00 }
-    .menu a:nth-child(2){ background:var(--accent-teal); color:#fff }
-    .menu a:nth-child(3){ background:#b85d3c; color:#fff }
-    .menu a:nth-child(4){ background:#f06b4a; color:#fff }
+    .nav-list a:hover{ transform:translateY(-4px); box-shadow:0 8px 20px rgba(0,0,0,0.06) }
 
-    .hamburger{
-      display:none;
-      width:36px;height:36px;border-radius:8px;
-      background:var(--accent-yellow);
-      align-items:center;justify-content:center;
-      cursor:pointer;
+    /* contact / CTA to right */
+    .header-actions{
+      display:flex;
+      gap:12px;
+      align-items:center;
+      min-width:170px;
+      justify-content:flex-end;
     }
-
-    /* BOTÃO WHATSAPP FLUTUANTE */
-    .whatsapp-btn {
-      position: fixed;
-      bottom: 20px;
-      left: 20px; /* Alterado para o canto esquerdo */
-      z-index: 1000;
-      background-color: #25D366;
-      color: white;
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-decoration: none;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-      transition: transform 0.3s ease;
-    }
-    .whatsapp-btn:hover { transform: scale(1.1); }
-
-    /* ===========================
-       HERO & SEÇÃO DE MARCAS
-       =========================== */
-    .hero-wrap{
-      width: 100%;
-      margin: 0;
+    .cta-btn{
+      background:var(--button);
+      color:#fff;
+      padding:8px 14px;
+      border-radius:10px;
+      font-weight:700;
+      box-shadow:0 8px 20px rgba(240,90,82,0.14);
     }
 
-    .hero{
-      /* Hero expandido com imagem de fundo */
+    /* ===== MÉTRICAS (abaixo do header) ===== */
+    .metrics-bar{
+      margin-top:88px; /* espaço para header fixo */
+      display:flex;
+      justify-content:center;
+      background:var(--plate);
       color:var(--white);
-      padding: 120px 32px;
-      position:relative;
-      overflow:hidden;
-      animation:fadeInUp .8s ease both;
-      margin-bottom: 0;
-      /* Imagem de fundo - substitua pela sua */
-      background-image: url('https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3');
-      background-size: cover;
-      background-position: center;
-      text-align: center;
-    }
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0, 0, 0, 0.4);
-      z-index: 1;
-    }
-    .hero h1, .hero p {
-      position: relative;
-      z-index: 2;
-    }
-    .hero h1{
-      font-family:"Baloo 2";
-      font-size:92px;
-      margin:0 0 6px;
-      line-height:0.9;
-      letter-spacing:1px;
-    }
-    .hero p{
-      margin:0;
-      font-weight:600;
-      opacity:.95;
-    }
-
-    /* Métrica fora do HERO */
-    .metrics-section{
-      max-width:1100px;
-      margin:0 auto 32px;
-      padding:0 16px;
+      padding:12px 18px;
+      box-shadow:0 6px 18px rgba(11,55,15,0.06);
     }
     .metrics{
+      max-width:1200px;
       display:flex;
-      gap:0;
-      border-radius:8px;
-      overflow:hidden;
-      box-shadow:var(--shadow);
+      gap:12px;
+      width:100%;
+      padding:6px;
     }
     .metric{
       flex:1;
-      background:var(--plate);
-      color:var(--white);
-      padding:18px 14px;
+      background:transparent;
+      padding:10px 12px;
+      border-radius:10px;
       text-align:center;
     }
-    .metric h3{ margin:0; font-size:20px; }
-    .metric span{display:block; font-size:12px; opacity:.9; margin-top:6px; }
+    .metric h4{ margin:0; font-size:18px; font-family:"Baloo 2"; }
+    .metric p{ margin:4px 0 0; font-size:13px; opacity:.95 }
 
-    /* ===========================
-       MAIN LAYOUT
-       =========================== */
-    main{max-width:1100px;margin:0 auto;padding:0 16px 80px}
+    /* ===== HERO - imagem estendida ===== */
+    .hero{
+      max-width:1400px;
+      margin:22px auto 0;
+      border-radius:14px;
+      overflow:visible;
+      position:relative;
+      padding:0 18px 28px;
+    }
 
-    /* ABOUT US - menor e editável */
+    .hero-inner{
+      background:linear-gradient(90deg, rgba(240,86,82,0.04), rgba(255,255,255,0.02));
+      border-radius:14px;
+      overflow:hidden;
+      display:flex;
+      gap:20px;
+      align-items:stretch;
+      box-shadow:var(--shadow);
+      min-height:320px;
+    }
+
+    /* left text area */
+    .hero-left{
+      flex:1;
+      padding:36px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      gap:12px;
+    }
+    .hero-left h1{
+      font-family:"Baloo 2";
+      font-size:56px;
+      margin:0;
+      color:var(--hero);
+      line-height:1;
+    }
+    .hero-left p{ margin:0; color:var(--text); font-weight:600 }
+
+    /* right extended image area — você vai substituir a imagem aqui */
+    .hero-image{
+      width:480px;
+      min-width:220px;
+      background:linear-gradient(180deg,#fff4f2,#ffecec);
+      display:flex;align-items:center;justify-content:center;
+      padding:18px;border-left:1px solid rgba(0,0,0,0.02);
+    }
+    .hero-image img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      border-radius:10px;
+      box-shadow:0 12px 30px rgba(0,0,0,0.08);
+      max-height:420px;
+    }
+
+    /* ===== MAIN LAYOUT ===== */
+    main{ max-width:1200px; margin:28px auto; padding:0 18px 80px; }
+
+    /* ABOUT */
     .about{
       display:grid;
-      grid-template-columns: 180px 1fr;
+      grid-template-columns:260px 1fr;
       gap:28px;
       align-items:center;
-      margin-top:28px;
-      background:transparent;
+      margin-top:22px;
     }
-    .about-photo-wrap{
-      width:180px;
-      height:180px;
-      border-radius:28px;
-      background:var(--card);
-      display:flex;align-items:center;justify-content:center;overflow:hidden;
-      box-shadow:var(--shadow);
+    .about-photo{
+      width:260px;height:260px;border-radius:18px;background:var(--card);
+      overflow:hidden;box-shadow:var(--shadow);
     }
-    .about-photo-wrap img{width:100%;height:100%;object-fit:cover}
+    .about-copy h3{ margin:0; font-family:"Baloo 2"; color:#6a2f2b; }
+    .about-copy p{ color:var(--muted); margin-top:10px }
 
-    .about h3{ margin:0; font-family:"Baloo 2"; color:#d2543f; }
-    .about .about-text-content p{ color:var(--muted); margin-top:8px; }
-    .about .small{ }
-
-    .cta-handle{
-      display:inline-block;
-      margin-top:14px;padding:8px 14px;border-radius:999px;
-      background:#ff6b63;color:#fff;font-weight:600;
-      box-shadow:0 6px 18px rgba(240,90,82,0.18);
-    }
-
-    /* PORTFÓLIO - Últimos Projetos */
-    .section-title{
-      font-family:"Baloo 2";
-      color:var(--project-color);
-      margin:36px 0 18px;
-      font-size:22px;
-    }
+    /* PORTFÓLIO (cor marrom escura) */
+    .section-title{ font-family:"Baloo 2"; color:#6a2f2b; margin:28px 0 14px; font-size:20px; }
     .portfolio-grid{
       display:grid;
       grid-template-columns:repeat(3,1fr);
-      gap:18px;
+      gap:16px;
     }
     .project{
-      background:var(--project-color);
+      background:var(--brown);
       color:var(--white);
-      padding:16px;border-radius:12px;min-height:280px;
-      display:flex;flex-direction:column;justify-content:end;position:relative;
-      overflow:hidden;box-shadow:var(--shadow);
+      padding:12px;
+      border-radius:14px;
+      min-height:180px;
+      display:flex;flex-direction:column;justify-content:flex-end;
       transition:transform .28s ease, box-shadow .28s ease;
+      box-shadow:var(--shadow);
     }
-    .project:hover{ transform:translateY(-8px); box-shadow:0 18px 40px rgba(18,18,18,0.12); }
+    .project:hover{ transform:translateY(-8px); box-shadow:0 22px 44px rgba(0,0,0,0.12) }
+    .project .meta{ opacity:.96 }
+    .project .meta small{ display:block; opacity:.85; margin-top:6px; font-size:13px }
 
-    .project-image-wrap{
-      position:absolute;
-      top:0;left:0;right:0;bottom:0;
-      z-index:1;
-      display:flex;align-items:center;justify-content:center;
-      overflow:hidden;
-    }
-    .project-image-wrap img{
-      width:100%;height:100%;object-fit:cover;opacity:.8;
-      transition:opacity .3s ease;
-    }
-    .project:hover .project-image-wrap img{ opacity:1; }
-
-    .project .meta{
-      background:rgba(0,0,0,0.4);
-      padding:8px;border-radius:8px;font-size:13px;color:#fff;
-      margin-top:8px;position:relative;z-index:2;
-    }
-
-    .portfolio-controls{ text-align:center;margin-top:12px; opacity:.7 }
-
-    /* TESTIMONIALS (FEEDBACK) */
-    .testimonials{ margin-top:36px; }
-    .test-wrap{ display:flex;flex-direction:column;gap:14px; }
+    /* TESTIMONIALS */
+    .test-wrap{ display:flex; flex-direction:column; gap:12px; margin-top:12px; }
     .test-card{
-      background:var(--accent-teal);
-      color:var(--white);
-      padding:18px;border-radius:26px;box-shadow:var(--shadow);
-      display:flex;gap:12px;align-items:flex-start;
-      transition:transform .25s ease;
+      background:linear-gradient(180deg, #2fbf9b, #28d0a0);
+      color:#fff; padding:16px; border-radius:16px; box-shadow:var(--shadow);
+      display:flex; gap:12px; align-items:flex-start;
     }
-    .test-card:hover{ transform:translateY(-6px) }
-    .test-card p{ }
-    .test-card .small{ }
+    .avatar{ min-width:56px; height:56px; border-radius:50%; background:rgba(255,255,255,0.14); display:flex;align-items:center;justify-content:center;font-weight:700;color:#fff }
 
-    .avatar{
-      min-width:56px;height:56px;border-radius:50%;background:rgba(255,255,255,0.2);
-      display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--white);
-    }
-    .star{ color:#ffd66a; margin-left:auto; font-weight:700 }
-
-    /* SERVICES / PACKAGES */
-    .services-grid{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:18px;
-      margin-top:26px;
-    }
-    .service-card{
-      background:var(--card); color:var(--white); padding:20px;border-radius:22px;
-      box-shadow:var(--shadow); min-height:160px;
-      display:flex;flex-direction:column; gap:10px;
-      transition:transform .2s ease, box-shadow .3s ease;
-      position: relative;
-    }
-    .service-card:hover{ transform:translateY(-8px) }
-
-    /* Animação Pulse (Exemplo simples em CSS) */
-    @keyframes pulse {
-      0% { box-shadow: 0 0 0 0 rgba(255, 107, 99, 0.4); }
-      70% { box-shadow: 0 0 0 15px rgba(255, 107, 99, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(255, 107, 99, 0); }
-    }
-    .pulse-card {
-      animation: pulse 2s infinite;
-    }
-
-    .service-card h4{ margin:0; font-family:"Baloo 2"; font-size:18px; }
-    .service-card p{ }
-    .service-card li{ }
-
-    .btn-contratar{
-      background:var(--accent-yellow); color:var(--text); font-weight:700;
-      padding:8px 16px; border-radius:12px; text-align:center;
-      margin-top:auto;
-      transition: opacity .3s ease;
-    }
-    .btn-contratar:hover{ opacity: .8 }
+    /* SERVICES */
+    .services-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:12px; }
+    .service-card{ background:#6a2f2b; color:#fff; padding:18px; border-radius:14px; box-shadow:var(--shadow); min-height:200px; display:flex;flex-direction:column; gap:10px; }
+    .service-card h4{ margin:0; font-family:"Baloo 2"; }
 
     /* CONTACT */
     .contact{
-      margin-top:36px;
+      margin-top:20px;
       background:var(--plate);
-      padding:24px;border-radius:20px;color:var(--white);
-      display:grid;grid-template-columns:1fr 1fr; gap:20px; align-items:start;
+      padding:18px;
+      border-radius:14px;
+      color:#fff;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:18px;
     }
-    .contact .info p{ margin:8px 0; color:rgba(255,255,255,0.95); }
-
-    .contact form{
-      display:flex;flex-direction:column; gap:10px;
-    }
-    .field{
-      background:transparent;border:2px solid rgba(0,0,0,0.05);padding:12px;border-radius:10px;
-      outline:none;
-      color: var(--white);
-      font-family: inherit;
-    }
-    .field::placeholder {
-      color: rgba(255,255,255,0.7);
-    }
-    .btn{
-      background:var(--button); color:#fff; padding:12px 16px;border-radius:12px;border:none;
-      cursor:pointer;font-weight:700;display:inline-block;
-      box-shadow:0 8px 20px rgba(240,90,82,0.18);
-      font-family: inherit;
-    }
+    .field{ padding:10px; border-radius:10px; border:2px solid rgba(0,0,0,0.05); background:transparent; color:#fff; outline:none; }
 
     /* FOOTER */
-    footer{
-      margin-top:36px;padding:32px 16px;background:var(--hero); color:var(--white);border-radius:8px;
+    footer{ margin-top:28px; padding:22px; background:var(--hero); color:#fff; border-radius:10px; text-align:center; }
+
+    /* WHATSAPP FLOAT */
+    .whatsapp-float{
+      position:fixed;
+      right:18px;
+      bottom:20px;
+      z-index:90;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      box-shadow:0 12px 30px rgba(0,0,0,0.18);
+    }
+    .whatsapp-btn{
+      width:56px; height:56px; border-radius:50%;
+      background:#25D366; display:flex; align-items:center; justify-content:center;
+      color:#fff; font-size:22px; box-shadow:0 8px 20px rgba(0,0,0,0.12);
+      border:3px solid #fff;
+    }
+    .whatsapp-label{
+      background:#fff;
+      color:#222;
+      font-weight:700;
+      padding:8px 12px;
+      border-radius:999px;
+      box-shadow:0 8px 20px rgba(0,0,0,0.08);
+      display:none; /* show on wider screens */
     }
 
-    /* NOVOS ESTILOS PARA OS PACOTES */
-    .price-container {
-      margin-top: auto;
+    /* RESPONSIVE */
+    @media (max-width:1100px){
+      .hero-image{ width:380px; }
+      .about{ grid-template-columns:200px 1fr; }
+      .portfolio-grid{ grid-template-columns:repeat(2,1fr); }
+      .services-grid{ grid-template-columns:repeat(2,1fr); }
     }
-    
-    .original-price {
-      text-decoration: line-through;
-      font-size: 14px;
-      opacity: 0.7;
-      margin-bottom: 5px;
+    @media (max-width:780px){
+      .container{ padding:10px 14px; gap:8px }
+      .logo-placeholder{ width:48px;height:48px }
+      .brand-title{ font-size:16px }
+      .nav-list a{ padding:8px 10px; font-size:13px }
+      .hero-left h1{ font-size:36px }
+      .hero-image{ display:none } /* esconde área da imagem em telas pequenas; você pode mantê-la se quiser */
+      .about{ grid-template-columns:1fr; }
+      .portfolio-grid{ grid-template-columns:1fr; }
+      .services-grid{ grid-template-columns:1fr; }
+      .metrics-bar{ padding:10px 12px }
+      .whatsapp-label{ display:none }
+      .whatsapp-float{ right:12px; bottom:12px }
     }
-    
-    .promo-price {
-      font-size: 22px;
-      font-weight: bold;
-      margin-bottom: 5px;
-    }
-    
-    .installments {
-      font-size: 12px;
-      opacity: 0.9;
-      margin-bottom: 10px;
-    }
-    
-    .countdown-timer {
-      background: #ffd66a;
-      color: #3b2a2a;
-      padding: 8px;
-      border-radius: 8px;
-      font-size: 12px;
-      text-align: center;
-      margin: 10px 0;
-      font-weight: bold;
+    @media (min-width:781px){
+      .whatsapp-label{ display:inline-block }
     }
 
-    /* SMALLER SCREENS */
-    @media (max-width:920px){
-      .about{ grid-template-columns: 160px 1fr; }
-      .about-photo-wrap{ width:160px; height:160px; }
-      .hero h1{ font-size:64px }
-      .portfolio-grid{ grid-template-columns:repeat(2,1fr) }
-      .services-grid{ grid-template-columns:repeat(2,1fr) }
-      .nav{padding:0 8px}
-      .menu{ margin-left:unset; margin-right:unset; }
+    /* small animations */
+    .fade-in{
+      animation:fadeInUp .7s ease both;
     }
-    @media (max-width:640px){
-      .topbar{padding:10px}
-      .brand{ font-size:34px }
-      .menu{ display:none; margin:0 auto; }
-      .hamburger{ display:flex }
-      .hero h1{ font-size:44px }
-      .hero {
-        padding: 80px 20px;
-      }
-      .about{ 
-        grid-template-columns:1fr; 
-        grid-auto-rows:auto;
-        text-align: center;
-      }
-      .about-photo-wrap{ 
-        width:140px; 
-        height:140px;
-        margin: 0 auto;
-      }
-      .portfolio-grid{ grid-template-columns:1fr }
-      .services-grid{ grid-template-columns:1fr }
-      .contact{ grid-template-columns:1fr }
-      .whatsapp-btn { width: 45px; height: 45px; bottom: 15px; left: 15px; }
-    }
-
-    /* ANIMAÇÕES */
     @keyframes fadeInUp{
-      from{ opacity:0; transform:translateY(18px) }
+      from{ opacity:0; transform:translateY(14px) }
       to{ opacity:1; transform:none }
     }
-
-    /* utility */
-    .muted{ color:var(--muted) }
-    .center{ text-align:center }
-    .small{ font-size:13px }
-    .pill{ display:inline-block;padding:6px 12px;border-radius:999px;background:rgba(0,0,0,.04);font-weight:600 }
-
   </style>
 </head>
 <body>
 
-  <a href="https://wa.me/5511999999999?text=Ol%C3%A1%2C%20gostaria%20de%20conversar%20sobre%20um%20projeto." target="_blank" class="whatsapp-btn" id="whatsapp-btn" title="Chamar no WhatsApp">
-    <svg fill="currentColor" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-      <path d="M12.04 1C6.062 1 1.258 5.757 1.258 11.666c0 1.942.502 3.824 1.458 5.467l-1.63 6.136 6.307-1.597c1.583.87 3.393 1.341 5.605 1.341 5.979 0 10.783-4.757 10.783-10.666S18.019 1 12.04 1zm3.878 14.505c-.214.354-.863.354-1.299.106-.436-.214-2.18-.847-2.527-.923-.347-.076-.595-.038-.863.354s-1.025 1.341-1.24 1.555c-.214.184-.436.214-.809.106-.436-.106-1.673-.67-3.193-1.956-1.189-1.025-1.975-2.262-2.223-2.641-.248-.378-.027-.587.184-.827.184-.184.42-.436.634-.67.184-.214.248-.354.347-.587.098-.214.053-.408-.027-.587-.076-.214-.66-.991-.908-1.24-.248-.248-.42-.214-.587-.214-.141 0-.308-.03-.475-.03-.49 0-1.077.214-1.464.57s-1.341 1.31-1.341 3.251c0 1.903 1.362 3.824 1.555 4.072.193.248 2.584 4.034 6.307 5.676 3.513 1.576 3.513 1.056 4.11 1.056.634 0 2.062-.801 2.388-1.555.326-.754.326-1.388.228-1.555-.133-.248-.49-.395-1.025-.668z"/>
-    </svg>
-  </a>
-
-  <header class="topbar" aria-label="site header">
-    <nav class="nav">
-      <div class="logo">
-        <div class="logo-brand" aria-hidden="true">
-          <div id="logo-image-container" style="width:50px;height:50px;border-radius:50%;overflow:hidden;background:#fff">
-            <img src="https://via.placeholder.com/50/FF6B5C/FFFFFF?text=L" alt="Logo Kállita" style="width:100%;height:100%;object-fit:cover;">
-          </div>
-          <div class="brand" contenteditable="true">kállita</div>
-          <div class="small muted" contenteditable="true">Seja bem-vindo(a)</div>
+  <!-- HEADER (fixo e sempre visível) -->
+  <header class="site-header" role="banner">
+    <div class="container">
+      <!-- logo area: substitua com sua logo (img) dentro .logo-placeholder ou troque por <img> -->
+      <div class="logo-wrap" aria-label="logo">
+        <div class="logo-placeholder" id="logoDiv" title="Inserir logo aqui">KD</div>
+        <div class="brand-text">
+          <div class="brand-title">Kallita Design</div>
+          <div class="brand-sub">Design Estratégico</div>
         </div>
       </div>
 
-      <div class="menu" role="navigation" aria-label="main">
-        <a href="#inicio" contenteditable="true">Início</a>
-        <a href="#servicos" contenteditable="true">Serviços</a>
-        <a href="#portfolio" contenteditable="true">Portfólio</a>
-        <a href="#contato" contenteditable="true">Contato</a>
-      </div>
+      <!-- nav centralizada (sempre visível, inclusive mobile) -->
+      <nav class="main-nav" role="navigation" aria-label="menu principal">
+        <div class="nav-list" role="menubar" aria-label="navegação principal">
+          <a href="#inicio" role="menuitem">Início</a>
+          <a href="#sobre" role="menuitem">Sobre</a>
+          <a href="#servicos" role="menuitem">Serviços</a>
+          <a href="#portfolio" role="menuitem">Portfólio</a>
+          <a href="#depoimentos" role="menuitem">Depoimentos</a>
+          <a href="#contato" role="menuitem">Contato</a>
+        </div>
+      </nav>
 
-      <div class="hamburger" id="hambtn" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu">
-        <svg width="20" height="14" viewBox="0 0 24 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect y="1" width="24" height="2" rx="1" fill="#3b2a2a"/>
-          <rect y="7" width="24" height="2" rx="1" fill="#3b2a2a"/>
-          <rect y="13" width="24" height="2" rx="1" fill="#3b2a2a"/>
-        </svg>
+      <!-- ações direita (opcional) -->
+      <div class="header-actions" role="group" aria-label="ações do cabeçalho">
+        <a class="cta-btn" href="#contato">Vamos conversar</a>
       </div>
-    </nav>
+    </div>
   </header>
 
-  <div class="hero-wrap">
-    <section id="inicio" class="hero" role="banner">
-      <h1 contenteditable="true">kállita</h1>
-      <p contenteditable="true">Design estratégico • Identidade visual • Posts e muito mais</p>
-    </section>
+  <!-- MÉTRICAS (abaixo do header) -->
+  <div class="metrics-bar fade-in" aria-hidden="true">
+    <div class="metrics">
+      <div class="metric">
+        <h4>+500</h4>
+        <p>Marcas transformadas</p>
+      </div>
+      <div class="metric">
+        <h4>+5</h4>
+        <p>Anos de experiência</p>
+      </div>
+      <div class="metric">
+        <h4>4.9/5</h4>
+        <p>Clientes satisfeitos</p>
+      </div>
+    </div>
   </div>
 
-  <section class="metrics-section">
-    <div class="metrics" aria-hidden="true">
-      <div class="metric">
-        <h3 contenteditable="true">+500</h3>
-        <span contenteditable="true">Marcas transformadas</span>
+  <!-- HERO (imagem estendida à direita) -->
+  <section id="inicio" class="hero">
+    <div class="hero-inner fade-in" role="region" aria-label="área principal">
+      <div class="hero-left">
+        <h1>Kallita</h1>
+        <p>Design estratégico • Identidade Visual • Conteúdo para redes</p>
+        <p class="small" style="margin-top:8px;color:var(--muted)">Espaço para subtítulo ou chamada — personalize aqui.</p>
       </div>
-      <div class="metric">
-        <h3 contenteditable="true">+5</h3>
-        <span contenteditable="true">Anos Experiência</span>
-      </div>
-      <div class="metric">
-        <h3 contenteditable="true">4.9/5</h3>
-        <span contenteditable="true">Clientes Satisfeitos</span>
+
+      <!-- substitua a imagem abaixo pela sua imagem de cabeçalho estendida -->
+      <div class="hero-image" aria-hidden="true">
+        <img id="heroImg" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1200&auto=format&fit=crop" alt="Imagem de destaque - substitua pela sua">
       </div>
     </div>
   </section>
 
   <main>
-
-    <section class="about" id="sobre">
-      <div class="about-photo-wrap" aria-hidden="true">
-        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=a1f8f2a9f7b4a1ad3a2e5c0f901c2f5f" alt="Foto - Kállita">
+    <!-- SOBRE -->
+    <section id="sobre" class="about fade-in" aria-labelledby="sobre-title">
+      <div class="about-photo" aria-hidden="true">
+        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=800&auto=format&fit=crop" alt="Foto Kallita">
       </div>
-
       <div class="about-copy">
-        <div class="small muted" contenteditable="true">About Us</div>
-        <h3 contenteditable="true">Prazer, Kállita Prado</h3>
-        <div class="about-text-content">
-          <p contenteditable="true">
-            Olá! Sou designer especializada em transformar marcas através de identidades únicas, estratégicas e visuais com propósito.
-            Trabalho com pequenas e médias empresas, criando posicionamento, identidades visuais, e conteúdos para redes sociais.
-          </p>
-        </div>
-
-        <a class="cta-handle" href="https://www.instagram.com/kallitaprado" target="_blank" rel="noopener" contenteditable="true"> @kallitaprado </a>
+        <small class="muted">Sobre</small>
+        <h3 id="sobre-title">Prazer, eu sou a Kallita</h3>
+        <p>Sou designer especializada em criar identidades visuais com propósito — que conversam com o público certo e geram resultados. Trabalho com branding, embalagens, direção de arte e conteúdo para redes sociais.</p>
+        <a class="cta-btn" href="#contato" style="display:inline-block;margin-top:12px">Contratar</a>
       </div>
     </section>
 
-    <h2 class="section-title" id="portfolio" contenteditable="true">Últimos Projetos</h2>
-
-    <div class="portfolio-grid" aria-live="polite">
-      <a href="seu-link-para-projeto-1.html" target="_blank" class="project">
-        <div class="project-image-wrap">
-          <img src="https://via.placeholder.com/400x300/F74F4F/FFFFFF?text=Projeto+1" alt="Capa Projeto 1">
-        </div>
-        <div class="meta" contenteditable="true">
-          <strong>Projeto Nome 1</strong>
-          <div class="small">Branding • Identidade</div>
-        </div>
-      </a>
-
-      <a href="seu-link-para-projeto-2.html" target="_blank" class="project">
-        <div class="project-image-wrap">
-          <img src="https://via.placeholder.com/400x300/F74F4F/FFFFFF?text=Projeto+2" alt="Capa Projeto 2">
-        </div>
-        <div class="meta" contenteditable="true">
-          <strong>Projeto Nome 2</strong>
-          <div class="small">Embalagem • Social</div>
-        </div>
-      </a>
-
-      <a href="seu-link-para-projeto-3.html" target="_blank" class="project">
-        <div class="project-image-wrap">
-          <img src="https://via.placeholder.com/400x300/F74F4F/FFFFFF?text=Projeto+3" alt="Capa Projeto 3">
-        </div>
-        <div class="meta" contenteditable="true">
-          <strong>Projeto Nome 3</strong>
-          <div class="small">Identidade Visual</div>
-        </div>
-      </a>
-    </div>
-
-    <div class="portfolio-controls center">
-      <button class="pill" onclick="viewAll()" contenteditable="true">Ver portfólio →</button>
-    </div>
-
-    <h2 class="section-title" contenteditable="true">Feedback</h2>
-    <section class="testimonials" id="depoimentos">
-      <div class="test-wrap" id="testWrap">
-
-        <div class="test-card">
-          <div class="avatar">KD</div>
-          <div>
-            <p contenteditable="true"><strong>"Kállita transformou nossa presença online. Profissional, criativa e rápida."</strong></p>
-            <div class="small" contenteditable="true">— Cliente: Padaria Bom Pão</div>
-          </div>
-          <div class="star">★★★★★</div>
-        </div>
-
-        <div class="test-card">
-          <div class="avatar">ML</div>
-          <div>
-            <p contenteditable="true"><strong>"A nova identidade aumentou nosso engajamento e trouxe clientes reais."</strong></p>
-            <div class="small" contenteditable="true">— Cliente: Studio Bem</div>
-          </div>
-          <div class="star">★★★★★</div>
-        </div>
-
-        <div class="test-card">
-          <div class="avatar">RG</div>
-          <div>
-            <p contenteditable="true"><strong>"Entrega impecável e atendimento super gentil — recomendo!"</strong></p>
-            <div class="small" contenteditable="true">— Cliente: Loja Morada</div>
-          </div>
-          <div class="star">★★★★☆</div>
-        </div>
-
+    <!-- SERVIÇOS -->
+    <h2 class="section-title" id="servicos">Pacotes</h2>
+    <div class="services-grid fade-in" aria-label="pacotes">
+      <div class="service-card">
+        <h4>Pro</h4>
+        <p class="small">Identidade básica + kit social</p>
+        <ul style="margin:8px 0 0 16px;">
+          <li>Logotipo</li>
+          <li>Manual básico</li>
+          <li>3 templates</li>
+        </ul>
+        <div style="margin-top:auto"><strong>A partir de R$ 1.500</strong></div>
       </div>
-      <div class="center" style="margin-top:10px">
-        <button class="pill" onclick="prevTest()">◀</button>
-        <button class="pill" onclick="nextTest()">▶</button>
+
+      <div class="service-card">
+        <h4>Premium</h4>
+        <p class="small">Estratégia de marca e aplicações</p>
+        <ul style="margin:8px 0 0 16px;">
+          <li>Direção de arte</li>
+          <li>Manual detalhado</li>
+          <li>Mockups</li>
+        </ul>
+        <div style="margin-top:auto"><strong>A partir de R$ 3.800</strong></div>
+      </div>
+
+      <div class="service-card">
+        <h4>Plus</h4>
+        <p class="small">Acompanhamento mensal</p>
+        <ul style="margin:8px 0 0 16px;">
+          <li>Estratégia contínua</li>
+          <li>Criação de campanhas</li>
+          <li>Suporte prioritário</li>
+        </ul>
+        <div style="margin-top:auto"><strong>A partir de R$ 2.400/mês</strong></div>
+      </div>
+    </div>
+
+    <!-- PORTFÓLIO -->
+    <h2 class="section-title">Últimos Projetos</h2>
+    <div class="portfolio-grid fade-in" id="portfolio" aria-live="polite">
+      <article class="project" aria-label="Projeto 1">
+        <div class="meta">
+          <strong>Projeto A</strong>
+          <small>Branding • Identidade</small>
+        </div>
+      </article>
+      <article class="project" aria-label="Projeto 2">
+        <div class="meta">
+          <strong>Projeto B</strong>
+          <small>Embalagem • Social</small>
+        </div>
+      </article>
+      <article class="project" aria-label="Projeto 3">
+        <div class="meta">
+          <strong>Projeto C</strong>
+          <small>Identidade Visual</small>
+        </div>
+      </article>
+    </div>
+
+    <!-- DEPOIMENTOS -->
+    <h2 class="section-title" id="depoimentos">Depoimentos</h2>
+    <section class="test-wrap fade-in" aria-label="depoimentos">
+      <div class="test-card">
+        <div class="avatar">PB</div>
+        <div>
+          <p><strong>“A Kallita renovou nossa marca e trouxe reconhecimento.”</strong></p>
+          <small>— Padaria Bom Pão</small>
+        </div>
+      </div>
+
+      <div class="test-card">
+        <div class="avatar">SM</div>
+        <div>
+          <p><strong>“Criatividade e estratégia: vendas aumentaram após o rebranding.”</strong></p>
+          <small>— Studio Bem</small>
+        </div>
       </div>
     </section>
 
-    <h2 class="section-title" id="servicos" contenteditable="true">Pacotes Personalizados</h2>
-    <div class="services-grid">
+    <!-- CONTATO -->
+    <h2 class="section-title">Contato</h2>
+    <section class="contact fade-in" id="contato" aria-label="contato">
+      <div>
+        <h4 style="margin:0 0 8px 0;color:#fff">Vamos conversar?</h4>
+        <p style="margin:0 0 12px 0;color:#fff">Conte o seu projeto que eu retorno com uma proposta.</p>
 
-      <div class="service-card pulse-card">
-        <h4 contenteditable="true">PRO</h4>
-        <p class="small" contenteditable="true">Ideal para quem está começando e precisa de identidade visual básica + kit social.</p>
-        <ul style="margin:8px 0 0 16px;color:rgba(255,255,255,0.95)">
-          <li contenteditable="true">Logotipo + Manual básico</li>
-          <li contenteditable="true">3 Post templates</li>
-          <li contenteditable="true">1 Revisão</li>
-        </ul>
-        <div class="price-container">
-          <div class="original-price" contenteditable="true">De: R$ 2.000</div>
-          <div class="promo-price" contenteditable="true">Por: R$ 1.500</div>
-          <div class="installments" contenteditable="true">ou 12x de R$ 125,00 com juros</div>
-        </div>
-        <div class="countdown-timer" id="countdown-pro">Últimas horas para adquirir por 25% de desconto!</div>
-        <a href="https://wa.me/5511999999999?text=Olá! Gostaria de contratar o pacote PRO" target="_blank" class="btn-contratar">CONTRATAR</a>
-      </div>
-
-      <div class="service-card">
-        <h4 contenteditable="true">PLUS</h4>
-        <p class="small" contenteditable="true">Para quem quer presença digital completa e acompanhamento.</p>
-        <ul style="margin:8px 0 0 16px;color:rgba(255,255,255,0.95)">
-          <li contenteditable="true">Estratégia mensal</li>
-          <li contenteditable="true">Criação de campanhas</li>
-          <li contenteditable="true">Suporte prioritário</li>
-        </ul>
-        <div class="price-container">
-          <div class="original-price" contenteditable="true">De: R$ 3.200/mês</div>
-          <div class="promo-price" contenteditable="true">Por: R$ 2.400/mês</div>
-          <div class="installments" contenteditable="true">ou 12x de R$ 200,00 com juros</div>
-        </div>
-        <div class="countdown-timer" id="countdown-plus">Últimas horas para adquirir por 25% de desconto!</div>
-        <a href="https://wa.me/5511999999999?text=Olá! Gostaria de contratar o pacote PLUS" target="_blank" class="btn-contratar">CONTRATAR</a>
-      </div>
-
-      <div class="service-card">
-        <h4 contenteditable="true">PREMIUM</h4>
-        <p class="small" contenteditable="true">Pacote mais completo com estratégia de marca e aplicações.</p>
-        <ul style="margin:8px 0 0 16px;color:rgba(255,255,255,0.95)">
-          <li contenteditable="true">Direção de arte</li>
-          <li contenteditable="true">Manual de uso detalhado</li>
-          <li contenteditable="true">Posts mensais (pacote)</li>
-        </ul>
-        <div class="price-container">
-          <div class="original-price" contenteditable="true">De: R$ 4.750</div>
-          <div class="promo-price" contenteditable="true">Por: R$ 3.800</div>
-          <div class="installments" contenteditable="true">ou 12x de R$ 316,67 com juros</div>
-        </div>
-        <div class="countdown-timer" id="countdown-premium">Últimas horas para adquirir por 20% de desconto!</div>
-        <a href="https://wa.me/5511999999999?text=Olá! Gostaria de contratar o pacote PREMIUM" target="_blank" class="btn-contratar">CONTRATAR</a>
-      </div>
-
-    </div>
-
-    <h2 class="section-title" id="contato" contenteditable="true">Contact & Info</h2>
-
-    <section class="contact" aria-label="contact section">
-      <div class="info">
-        <h3 class="muted" contenteditable="true">Contato & Info</h3>
-        <p contenteditable="true">Quer transformar sua marca? Me conte sobre seu projeto — vamos conversar!</p>
-
-        <p class="small"><strong>Endereço</strong><br/><span contenteditable="true">São Paulo, Brasil</span></p>
-        <p class="small"><strong>Telefone</strong><br/><span contenteditable="true">+55 (11) 99999-999</span></p>
-        <p class="small"><strong>Email</strong><br/><span contenteditable="true">seu.nome@mail.com</span></p>
+        <p style="margin:8px 0 0 0;color:#fff"><strong>Localização</strong><br/>São Paulo, Brasil</p>
+        <p style="margin:8px 0 0 0;color:#fff"><strong>Email</strong><br/>seu.email@mail.com</p>
       </div>
 
       <form onsubmit="submitForm(event)" aria-label="formulário de contato">
         <input class="field" type="text" id="name" name="name" placeholder="Nome" required>
         <input class="field" type="email" id="email" name="email" placeholder="Email" required>
-        <input class="field" type="text" id="subject" name="subject" placeholder="Assunto (ex: identidade visual)">
-        <textarea class="field" id="message" name="message" placeholder="Mensagem" rows="5" required></textarea>
-
-        <button class="btn" type="submit" contenteditable="true">Enviar Mensagem</button>
+        <input class="field" type="text" id="subject" name="subject" placeholder="Assunto">
+        <textarea class="field" id="message" name="message" rows="5" placeholder="Mensagem" required></textarea>
+        <button class="cta-btn" type="submit" style="width:100%; margin-top:6px">Enviar</button>
       </form>
     </section>
 
   </main>
 
-  <footer class="center">
-    <div style="max-width:1100px;margin:0 auto;padding:0 16px;">
-      <div style="display:flex;gap:20px;align-items:center;justify-content:space-between;flex-wrap:wrap">
-        <div class="brand" style="color:#fff">kállita</div>
-        <div class="small" contenteditable="true">© <span id="year"></span> Kállita Design — Todos os direitos reservados</div>
-      </div>
+  <footer>
+    <div style="max-width:1200px;margin:0 auto;padding:12px 18px;color:#fff">
+      © <span id="year"></span> Kallita Design — Todos os direitos reservados
     </div>
   </footer>
 
+  <!-- WHATSAPP FLOAT -->
+  <div class="whatsapp-float" aria-hidden="false">
+    <!-- substitua o link abaixo pelo seu link do WhatsApp (ex: https://wa.me/55119xxxxxxxx) -->
+    <a class="whatsapp-label" href="https://wa.me/5511999999999" target="_blank" rel="noopener">Olá — Quero orçar</a>
+    <a class="whatsapp-btn" href="https://wa.me/5511999999999" target="_blank" rel="noopener" aria-label="Abrir WhatsApp">
+      <!-- ícone simples SVG -->
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20.52 3.48A11.91 11.91 0 0012 0C5.373 0 0 5.373 0 12a11.9 11.9 0 001.79 6.18L0 24l5.94-1.7A11.92 11.92 0 0012 24c6.627 0 12-5.373 12-12 0-3.18-1.24-6.18-3.48-8.52z" fill="#25D366"/>
+        <path d="M17.29 14.08c-.29-.14-1.7-.84-1.96-.94-.26-.1-.45-.15-.64.14-.19.29-.73.94-.9 1.13-.16.19-.33.21-.62.07-.29-.14-1.22-.45-2.33-1.44-.86-.77-1.44-1.73-1.61-2.02-.16-.28-.02-.43.12-.57.12-.12.29-.33.43-.5.15-.17.2-.29.32-.48.12-.19.05-.36-.02-.5-.07-.14-.64-1.54-.88-2.11-.23-.55-.47-.48-.64-.48-.17 0-.36-.02-.55-.02-.19 0-.5.07-.76.36-.26.29-1 1-1 2.44 0 1.44 1.03 2.83 1.18 3.03.15.19 2.03 3.1 4.92 4.23 2.9 1.12 2.9.74 3.42.69.52-.05 1.69-.69 1.93-1.36.24-.67.24-1.25.17-1.36-.07-.11-.26-.19-.55-.33z" fill="#fff"/>
+      </svg>
+    </a>
+  </div>
+
+  <!-- SCRIPTS -->
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // MOBILE MENU - simples toggle que abre navegação quando em telas pequenas
-    const hambtn = document.getElementById('hambtn');
-    hambtn && hambtn.addEventListener('click', () => {
-      const m = document.querySelector('.menu');
-      const isExpanded = hambtn.getAttribute('aria-expanded') === 'true';
-      if(!m) return;
-      if(getComputedStyle(m).display === 'none') {
-        m.style.display = 'flex';
-        m.style.position = 'absolute';
-        m.style.right = '16px';
-        m.style.top = '70px';
-        m.style.flexDirection = 'column';
-        m.style.background = 'rgba(255,255,255,0.95)';
-        m.style.padding = '12px';
-        m.style.borderRadius = '12px';
-        m.style.boxShadow = '0 12px 30px rgba(0,0,0,0.09)';
-        m.style.margin = '0'; // Remover auto-margin quando é mobile/flutuante
-        hambtn.setAttribute('aria-expanded', 'true');
-      } else {
-        m.style.display = 'none';
-        hambtn.setAttribute('aria-expanded', 'false');
-      }
-    });
-
-    // Fechar menu ao clicar em um link (mobile)
-    document.querySelectorAll('.menu a').forEach(link => {
-      link.addEventListener('click', () => {
-        if(window.innerWidth <= 640) {
-          const m = document.querySelector('.menu');
-          const hambtn = document.getElementById('hambtn');
-          m.style.display = 'none';
-          hambtn.setAttribute('aria-expanded', 'false');
-        }
-      });
-    });
-
-    // CAROUSEL DE TESTEMUNHOS (simples)
-    let currentTest = 0;
-    const tests = Array.from(document.querySelectorAll('#testWrap .test-card'));
-    function showTest(index){
-      tests.forEach((t,i)=> {
-        t.style.display = (i === index) ? 'flex' : 'none';
-      });
+    // simples show/hide do label whatsapp em mobile
+    function checkWhatsLabel(){
+      const label = document.querySelector('.whatsapp-label');
+      if(window.innerWidth < 780) label.style.display = 'none';
+      else label.style.display = 'inline-block';
     }
-    function nextTest(){
-      currentTest = (currentTest + 1) % tests.length;
-      showTest(currentTest);
-    }
-    function prevTest(){
-      currentTest = (currentTest - 1 + tests.length) % tests.length;
-      showTest(currentTest);
-    }
-    // inicializa
-    if(tests.length) showTest(0);
-    // auto-rotaciona a cada 6s
-    setInterval(nextTest, 6000);
+    checkWhatsLabel();
+    window.addEventListener('resize', checkWhatsLabel);
 
-    // Funções globais usadas nos botões
-    function viewAll(){ alert('Levar para página de portfólio completo (substitua por link real).'); }
-
-    // FORM: apenas simula envio (substitua action por Formspree/Netlify para produção)
+    // Formulário de exemplo (simula envio). Para produção, conecte a Formspree/Netlify.
     function submitForm(e){
       e.preventDefault();
-      const name = document.getElementById('name').value;
-      const email = document.getElementById('email').value;
-      // Aqui você faria um fetch para seu endpoint ou redirecionamento a Formspree
-      alert('Obrigado, ' + name + '! Sua mensagem foi recebida (simulação).\nEmail: ' + email);
+      const name = document.getElementById('name').value || 'Amigo(a)';
+      alert('Obrigado, ' + name + '! Sua mensagem foi recebida (simulação).');
       e.target.reset();
     }
 
-    // Acessibilidade: esconder menu em resize grande
-    window.addEventListener('resize', () => {
-      const m = document.querySelector('.menu');
-      const hambtn = document.getElementById('hambtn');
-      if(!m) return;
-      if(window.innerWidth > 640){
-        m.style.display = 'flex';
-        m.style.position = '';
-        m.style.top = '';
-        m.style.right = '';
-        m.style.flexDirection = '';
-        m.style.background = '';
-        m.style.padding = '';
-        m.style.borderRadius = '';
-        m.style.boxShadow = '';
-        m.style.margin = '0 auto'; // Re-centraliza
-        hambtn.setAttribute('aria-expanded', 'false');
-      } else {
-        m.style.display = 'none';
-        m.style.margin = '0';
-        hambtn.setAttribute('aria-expanded', 'false');
-      }
+    // pequenas animações de entrada (adicional)
+    document.addEventListener('DOMContentLoaded', ()=> {
+      const fadeEls = document.querySelectorAll('.fade-in');
+      fadeEls.forEach((el, i) => {
+        el.style.opacity = 0;
+        el.style.transform = 'translateY(10px)';
+        setTimeout(()=> {
+          el.style.transition = 'opacity .6s ease, transform .6s ease';
+          el.style.opacity = 1;
+          el.style.transform = 'none';
+        }, 120 * i);
+      });
     });
 
-    // CONTAGEM REGRESSIVA PARA OS PACOTES
-    function updateCountdown() {
-      // Definir a data de término (exemplo: 24 horas a partir de agora)
-      const endDate = new Date();
-      endDate.setHours(endDate.getHours() + 24);
-      
-      const now = new Date().getTime();
-      const distance = endDate - now;
-      
-      if (distance < 0) {
-        document.querySelectorAll('.countdown-timer').forEach(timer => {
-          timer.innerHTML = "Oferta expirada!";
-        });
-        return;
-      }
-      
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-      
-      document.querySelectorAll('.countdown-timer').forEach(timer => {
-        timer.innerHTML = `Últimas ${hours}h ${minutes}m ${seconds}s para adquirir com desconto!`;
-      });
-    }
-    
-    // Atualizar a contagem regressiva a cada segundo
-    setInterval(updateCountdown, 1000);
-    updateCountdown();
+    // Utilitário: permite substituir a logo dinamicamente (se quiser via console ou script)
+    // Ex: document.getElementById('logoDiv').innerHTML = '<img src=\"/logo.png\" style=\"width:100%;height:100%;object-fit:contain\">'
   </script>
-
 </body>
 </html>
