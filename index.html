@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Kállita Design — Portfólio</title>
 
-  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
   <style>
@@ -25,6 +24,8 @@
       --white: #fff;
       --shadow: 0 8px 20px rgba(18,18,18,0.08);
       --radius-lg: 22px;
+      /* NOVA VARIÁVEL: Cor dos projetos (Portfólio) */
+      --project-color: #F74F4F;
     }
 
     *{box-sizing:border-box}
@@ -42,10 +43,11 @@
     a{color:inherit;text-decoration:none}
     img{max-width:100%;height:auto;display:block}
 
-    /* ===============
-       HEADER / NAV
-       =============== */
+    /* ===========================
+       HEADER / NAV / WHATSAPP
+       =========================== */
     .topbar{
+      /* Centralizando o conteúdo do header */
       display:flex;
       justify-content:center;
       padding:18px 24px;
@@ -70,6 +72,15 @@
       align-items:center;
       gap:12px;
       margin-right:auto;
+      /* Ajuste para o header ser mais responsivo/extendido */
+      flex-grow:1;
+      max-width:100%;
+      justify-content:space-between;
+    }
+    .logo-brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
     }
     .brand{
       font-family:"Baloo 2";
@@ -78,10 +89,15 @@
       letter-spacing:1px;
       transform:translateY(-2px);
     }
+
+    /* MENU CENTRALIZADO: Usando flexbox no .nav e auto margins */
     .menu{
       display:flex;
       gap:14px;
       align-items:center;
+      /* Centraliza o menu no espaço restante */
+      margin-left:auto;
+      margin-right:auto;
     }
     .menu a{
       padding:8px 16px;
@@ -102,12 +118,36 @@
       cursor:pointer;
     }
 
-    /* ===============
-       HERO
-       =============== */
-    .hero{
+    /* BOTÃO WHATSAPP FLUTUANTE */
+    .whatsapp-btn {
+      position: fixed;
+      bottom: 20px;
+      left: 20px; /* Alterado para o canto esquerdo */
+      z-index: 1000;
+      background-color: #25D366;
+      color: white;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease;
+    }
+    .whatsapp-btn:hover { transform: scale(1.1); }
+
+    /* ===========================
+       HERO & SEÇÃO DE MARCAS
+       =========================== */
+    .hero-wrap{
       max-width:1100px;
-      margin:24px auto 12px;
+      margin:24px auto 0;
+    }
+
+    .hero{
+      /* Removendo metrics para div separada */
       background:var(--hero);
       color:var(--white);
       border-radius:12px;
@@ -116,6 +156,7 @@
       position:relative;
       overflow:hidden;
       animation:fadeInUp .8s ease both;
+      margin-bottom: 24px; /* Espaçamento após o hero */
     }
     .hero h1{
       font-family:"Baloo 2";
@@ -130,13 +171,18 @@
       opacity:.95;
     }
 
-    /* metric bar */
+    /* Métrica fora do HERO */
+    .metrics-section{
+      max-width:1100px;
+      margin:0 auto 32px; /* Margem ajustada para ficar abaixo do Hero */
+      padding:0 16px;
+    }
     .metrics{
       display:flex;
       gap:0;
-      margin-top:14px;
       border-radius:8px;
       overflow:hidden;
+      box-shadow:var(--shadow);
     }
     .metric{
       flex:1;
@@ -146,30 +192,36 @@
       text-align:center;
     }
     .metric h3{ margin:0; font-size:20px; }
-    .metric span{display:block; font-size:12px; opacity:.9; margin-top:6px}
+    .metric span{display:block; font-size:12px; opacity:.9; margin-top:6px; }
 
-    /* ===============
+    /* ===========================
        MAIN LAYOUT
-       =============== */
-    main{max-width:1100px;margin:32px auto;padding:0 16px 80px}
+       =========================== */
+    main{max-width:1100px;margin:0 auto;padding:0 16px 80px}
 
-    /* ABOUT */
+    /* ABOUT US - menor e editável */
     .about{
       display:grid;
-      grid-template-columns: 220px 1fr;
+      grid-template-columns: 180px 1fr; /* Coluna da imagem menor */
       gap:28px;
       align-items:center;
       margin-top:28px;
       background:transparent;
     }
-    .about-photo{
-      width:220px;height:220px;border-radius:28px;background:var(--card);
+    .about-photo-wrap{
+      width:180px; /* Tamanho do container menor */
+      height:180px;
+      border-radius:28px;
+      background:var(--card);
       display:flex;align-items:center;justify-content:center;overflow:hidden;
       box-shadow:var(--shadow);
     }
-    .about-photo img{width:100%;height:100%;object-fit:cover}
-    .about h3{ margin:0; font-family:"Baloo 2"; color:#d2543f;}
-    .about p{ color:var(--muted); margin-top:8px; }
+    .about-photo-wrap img{width:100%;height:100%;object-fit:cover}
+
+    .about h3{ margin:0; font-family:"Baloo 2"; color:#d2543f; }
+    .about .about-text-content p{ color:var(--muted); margin-top:8px; }
+    .about .small{ }
+
 
     .cta-handle{
       display:inline-block;
@@ -178,38 +230,52 @@
       box-shadow:0 6px 18px rgba(240,90,82,0.18);
     }
 
-    /* PORTFÓLIO */
+    /* PORTFÓLIO - Últimos Projetos */
     .section-title{
       font-family:"Baloo 2";
-      color:#7BB156;
+      color:var(--project-color); /* Usando a nova variável para cor */
       margin:36px 0 18px;
       font-size:22px;
     }
-
     .portfolio-grid{
       display:grid;
       grid-template-columns:repeat(3,1fr);
       gap:18px;
     }
     .project{
-      background:linear-gradient(180deg, rgba(255,255,255,0.06), rgba(0,0,0,0.02));
-      padding:16px;border-radius:12px;min-height:180px;
+      background:var(--project-color); /* Cor de fundo alterada */
+      color:var(--white);
+      padding:16px;border-radius:12px;min-height:280px; /* Altura aumentada para caber imagem */
       display:flex;flex-direction:column;justify-content:end;position:relative;
       overflow:hidden;box-shadow:var(--shadow);
       transition:transform .28s ease, box-shadow .28s ease;
     }
     .project:hover{ transform:translateY(-8px); box-shadow:0 18px 40px rgba(18,18,18,0.12); }
-    .project .meta{ background:rgba(255,255,255,0.06); padding:8px;border-radius:8px;font-size:13px;color:#fff; margin-top:8px; }
+
+    .project-image-wrap{
+      position:absolute;
+      top:0;left:0;right:0;bottom:0;
+      z-index:1;
+      display:flex;align-items:center;justify-content:center;
+      overflow:hidden;
+    }
+    .project-image-wrap img{
+      width:100%;height:100%;object-fit:cover;opacity:.8;
+      transition:opacity .3s ease;
+    }
+    .project:hover .project-image-wrap img{ opacity:1; }
+
+    .project .meta{
+      background:rgba(0,0,0,0.4); /* Fundo escuro para destacar texto */
+      padding:8px;border-radius:8px;font-size:13px;color:#fff;
+      margin-top:8px;position:relative;z-index:2;
+    }
 
     .portfolio-controls{ text-align:center;margin-top:12px; opacity:.7 }
 
-    /* TESTIMONIALS */
-    .testimonials{
-      margin-top:36px;
-    }
-    .test-wrap{
-      display:flex;flex-direction:column;gap:14px;
-    }
+    /* TESTIMONIALS (FEEDBACK) */
+    .testimonials{ margin-top:36px; }
+    .test-wrap{ display:flex;flex-direction:column;gap:14px; }
     .test-card{
       background:var(--accent-teal);
       color:var(--white);
@@ -218,6 +284,9 @@
       transition:transform .25s ease;
     }
     .test-card:hover{ transform:translateY(-6px) }
+    .test-card p{ }
+    .test-card .small{ }
+
     .avatar{
       min-width:56px;height:56px;border-radius:50%;background:rgba(255,255,255,0.2);
       display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--white);
@@ -234,11 +303,32 @@
     .service-card{
       background:var(--card); color:var(--white); padding:20px;border-radius:22px;
       box-shadow:var(--shadow); min-height:160px;
-      display:flex;flex-direction:column; gap:10px; transition:transform .2s ease;
+      display:flex;flex-direction:column; gap:10px;
+      transition:transform .2s ease, box-shadow .3s ease;
     }
     .service-card:hover{ transform:translateY(-8px) }
 
-    .service-card h4{ margin:0; font-family:"Baloo 2"; font-size:18px }
+    /* Animação Pulse (Exemplo simples em CSS) */
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(255, 107, 99, 0.4); }
+      70% { box-shadow: 0 0 0 15px rgba(255, 107, 99, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(255, 107, 99, 0); }
+    }
+    .pulse-card {
+      animation: pulse 2s infinite;
+    }
+
+    .service-card h4{ margin:0; font-family:"Baloo 2"; font-size:18px; }
+    .service-card p{ }
+    .service-card li{ }
+
+    .btn-contratar{
+      background:var(--accent-yellow); color:var(--text); font-weight:700;
+      padding:8px 16px; border-radius:12px; text-align:center;
+      margin-top:auto;
+      transition: opacity .3s ease;
+    }
+    .btn-contratar:hover{ opacity: .8 }
 
     /* CONTACT */
     .contact{
@@ -247,7 +337,7 @@
       padding:24px;border-radius:20px;color:var(--white);
       display:grid;grid-template-columns:1fr 1fr; gap:20px; align-items:start;
     }
-    .contact .info p{ margin:8px 0; color:rgba(255,255,255,0.95) }
+    .contact .info p{ margin:8px 0; color:rgba(255,255,255,0.95); }
 
     .contact form{
       display:flex;flex-direction:column; gap:10px;
@@ -255,11 +345,17 @@
     .field{
       background:transparent;border:2px solid rgba(0,0,0,0.05);padding:12px;border-radius:10px;
       outline:none;
+      color: var(--white);
+      font-family: inherit;
+    }
+    .field::placeholder {
+      color: rgba(255,255,255,0.7);
     }
     .btn{
       background:var(--button); color:#fff; padding:12px 16px;border-radius:12px;border:none;
       cursor:pointer;font-weight:700;display:inline-block;
       box-shadow:0 8px 20px rgba(240,90,82,0.18);
+      font-family: inherit;
     }
 
     /* FOOTER */
@@ -269,22 +365,26 @@
 
     /* SMALLER SCREENS */
     @media (max-width:920px){
+      /* Reduzindo o ABOUT US para telas menores */
       .about{ grid-template-columns: 160px 1fr; }
+      .about-photo-wrap{ width:160px; height:160px; }
       .hero h1{ font-size:64px }
       .portfolio-grid{ grid-template-columns:repeat(2,1fr) }
       .services-grid{ grid-template-columns:repeat(2,1fr) }
       .nav{padding:0 8px}
+      .menu{ margin-left:unset; margin-right:unset; }
     }
     @media (max-width:640px){
       .topbar{padding:10px}
       .brand{ font-size:34px }
-      .menu{ display:none }
+      .menu{ display:none; margin:0 auto; } /* Força centralização quando visível no JS */
       .hamburger{ display:flex }
       .hero h1{ font-size:44px }
       .about{ grid-template-columns:1fr; grid-auto-rows:auto; }
       .portfolio-grid{ grid-template-columns:1fr }
       .services-grid{ grid-template-columns:1fr }
       .contact{ grid-template-columns:1fr }
+      .whatsapp-btn { width: 45px; height: 45px; bottom: 15px; left: 15px; }
     }
 
     /* ANIMAÇÕES */
@@ -303,22 +403,32 @@
 </head>
 <body>
 
-  <!-- NAV -->
+  <a href="https://wa.me/5511999999999?text=Ol%C3%A1%2C%20gostaria%20de%20conversar%20sobre%20um%20projeto." target="_blank" class="whatsapp-btn" id="whatsapp-btn" title="Chamar no WhatsApp">
+    <svg fill="currentColor" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12.04 1C6.062 1 1.258 5.757 1.258 11.666c0 1.942.502 3.824 1.458 5.467l-1.63 6.136 6.307-1.597c1.583.87 3.393 1.341 5.605 1.341 5.979 0 10.783-4.757 10.783-10.666S18.019 1 12.04 1zm3.878 14.505c-.214.354-.863.354-1.299.106-.436-.214-2.18-.847-2.527-.923-.347-.076-.595-.038-.863.354s-1.025 1.341-1.24 1.555c-.214.184-.436.214-.809.106-.436-.106-1.673-.67-3.193-1.956-1.189-1.025-1.975-2.262-2.223-2.641-.248-.378-.027-.587.184-.827.184-.184.42-.436.634-.67.184-.214.248-.354.347-.587.098-.214.053-.408-.027-.587-.076-.214-.66-.991-.908-1.24-.248-.248-.42-.214-.587-.214-.141 0-.308-.03-.475-.03-.49 0-1.077.214-1.464.57s-1.341 1.31-1.341 3.251c0 1.903 1.362 3.824 1.555 4.072.193.248 2.584 4.034 6.307 5.676 3.513 1.576 3.513 1.056 4.11 1.056.634 0 2.062-.801 2.388-1.555.326-.754.326-1.388.228-1.555-.133-.248-.49-.395-1.025-.668z"/>
+    </svg>
+  </a>
+
   <header class="topbar" aria-label="site header">
     <nav class="nav">
-      <div class="logo" aria-hidden="true">
-        <div class="brand">kállita</div>
-        <div class="small muted">Seja bem-vindo(a)</div>
+      <div class="logo">
+        <div class="logo-brand" aria-hidden="true">
+          <div id="logo-image-container" style="width:50px;height:50px;border-radius:50%;overflow:hidden;background:#fff">
+            <img src="https://via.placeholder.com/50/FF6B5C/FFFFFF?text=L" alt="Logo Kállita" style="width:100%;height:100%;object-fit:cover;">
+          </div>
+          <div class="brand" contenteditable="true">kállita</div>
+          <div class="small muted" contenteditable="true">Seja bem-vindo(a)</div>
+        </div>
       </div>
 
       <div class="menu" role="navigation" aria-label="main">
-        <a href="#inicio">Início</a>
-        <a href="#servicos">Serviços</a>
-        <a href="#portfolio">Portfólio</a>
-        <a href="#contato">Contato</a>
+        <a href="#inicio" contenteditable="true">Início</a>
+        <a href="#servicos" contenteditable="true">Serviços</a>
+        <a href="#portfolio" contenteditable="true">Portfólio</a>
+        <a href="#contato" contenteditable="true">Contato</a>
       </div>
 
-      <div class="hamburger" id="hambtn" aria-hidden="true">
+      <div class="hamburger" id="hambtn" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu">
         <svg width="20" height="14" viewBox="0 0 24 16" fill="none" xmlns="http://www.w3.org/2000/svg">
           <rect y="1" width="24" height="2" rx="1" fill="#3b2a2a"/>
           <rect y="7" width="24" height="2" rx="1" fill="#3b2a2a"/>
@@ -328,115 +438,116 @@
     </nav>
   </header>
 
-  <!-- HERO -->
-  <section id="inicio" class="hero" role="banner">
-    <h1>kállita</h1>
-    <p>Design estratégico • Identidade visual • Posts e muito mais</p>
+  <div class="hero-wrap">
+    <section id="inicio" class="hero" role="banner">
+      <h1 contenteditable="true">kállita</h1>
+      <p contenteditable="true">Design estratégico • Identidade visual • Posts e muito mais</p>
+    </section>
+  </div>
 
+  <section class="metrics-section">
     <div class="metrics" aria-hidden="true">
       <div class="metric">
-        <h3>+500</h3>
-        <span>Marcas transformadas</span>
+        <h3 contenteditable="true">+500</h3>
+        <span contenteditable="true">Marcas transformadas</span>
       </div>
       <div class="metric">
-        <h3>+5</h3>
-        <span>Anos Experiência</span>
+        <h3 contenteditable="true">+5</h3>
+        <span contenteditable="true">Anos Experiência</span>
       </div>
       <div class="metric">
-        <h3>4.9/5</h3>
-        <span>Clientes Satisfeitos</span>
+        <h3 contenteditable="true">4.9/5</h3>
+        <span contenteditable="true">Clientes Satisfeitos</span>
       </div>
     </div>
   </section>
 
   <main>
 
-    <!-- ABOUT -->
     <section class="about" id="sobre">
-      <div class="about-photo" aria-hidden="true">
-        <!-- Substitua pela sua foto -->
+      <div class="about-photo-wrap" aria-hidden="true">
         <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=a1f8f2a9f7b4a1ad3a2e5c0f901c2f5f" alt="Foto - Kállita">
       </div>
 
       <div class="about-copy">
-        <div class="small muted">About Us</div>
-        <h3>Prazer, Kállita Prado</h3>
-        <p>
-          Olá! Sou designer especializada em transformar marcas através de identidades únicas, estratégicas e visuais com propósito.
-          Trabalho com pequenas e médias empresas, criando posicionamento, identidades visuais, e conteúdos para redes sociais.
-        </p>
+        <div class="small muted" contenteditable="true">About Us</div>
+        <h3 contenteditable="true">Prazer, Kállita Prado</h3>
+        <div class="about-text-content">
+          <p contenteditable="true">
+            Olá! Sou designer especializada em transformar marcas através de identidades únicas, estratégicas e visuais com propósito.
+            Trabalho com pequenas e médias empresas, criando posicionamento, identidades visuais, e conteúdos para redes sociais.
+          </p>
+        </div>
 
-        <a class="cta-handle" href="https://www.instagram.com/" target="_blank" rel="noopener"> @kallitaprado </a>
+        <a class="cta-handle" href="https://www.instagram.com/" target="_blank" rel="noopener" contenteditable="true"> @kallitaprado </a>
       </div>
     </section>
 
-    <!-- PORTFÓLIO -->
-    <h2 class="section-title" id="portfolio">Últimos Projetos</h2>
+    <h2 class="section-title" id="portfolio" contenteditable="true">Últimos Projetos</h2>
 
     <div class="portfolio-grid" aria-live="polite">
-      <!-- Project 1 -->
-      <article class="project">
-        <div style="height:120px;background:linear-gradient(135deg,#ffecec,#f7cfc9);border-radius:12px;margin-bottom:8px"></div>
-        <div class="meta">
-          <strong>Projeto Nome</strong>
+      <a href="seu-link-para-projeto-1.html" target="_blank" class="project">
+        <div class="project-image-wrap">
+          <img src="https://via.placeholder.com/400x300/F74F4F/FFFFFF?text=Projeto+1" alt="Capa Projeto 1">
+        </div>
+        <div class="meta" contenteditable="true">
+          <strong>Projeto Nome 1</strong>
           <div class="small">Branding • Identidade</div>
         </div>
-      </article>
+      </a>
 
-      <!-- Project 2 -->
-      <article class="project">
-        <div style="height:120px;background:linear-gradient(135deg,#e6fff0,#baf0d6);border-radius:12px;margin-bottom:8px"></div>
-        <div class="meta">
-          <strong>Projeto Nome</strong>
+      <a href="seu-link-para-projeto-2.html" target="_blank" class="project">
+        <div class="project-image-wrap">
+          <img src="https://via.placeholder.com/400x300/F74F4F/FFFFFF?text=Projeto+2" alt="Capa Projeto 2">
+        </div>
+        <div class="meta" contenteditable="true">
+          <strong>Projeto Nome 2</strong>
           <div class="small">Embalagem • Social</div>
         </div>
-      </article>
+      </a>
 
-      <!-- Project 3 -->
-      <article class="project">
-        <div style="height:120px;background:linear-gradient(135deg,#fff2e8,#ffd6c4);border-radius:12px;margin-bottom:8px"></div>
-        <div class="meta">
-          <strong>Projeto Nome</strong>
+      <a href="seu-link-para-projeto-3.html" target="_blank" class="project">
+        <div class="project-image-wrap">
+          <img src="https://via.placeholder.com/400x300/F74F4F/FFFFFF?text=Projeto+3" alt="Capa Projeto 3">
+        </div>
+        <div class="meta" contenteditable="true">
+          <strong>Projeto Nome 3</strong>
           <div class="small">Identidade Visual</div>
         </div>
-      </article>
+      </a>
     </div>
 
     <div class="portfolio-controls center">
-      <button class="pill" onclick="viewAll()">Ver portfólio →</button>
+      <button class="pill" onclick="viewAll()" contenteditable="true">Ver portfólio →</button>
     </div>
 
-    <!-- TESTIMONIALS -->
-    <h2 class="section-title">Client's Review</h2>
+    <h2 class="section-title" contenteditable="true">Feedback</h2>
     <section class="testimonials" id="depoimentos">
       <div class="test-wrap" id="testWrap">
 
-        <!-- Testimonial 1 -->
         <div class="test-card">
           <div class="avatar">KD</div>
           <div>
-            <p><strong>“Kállita transformou nossa presença online. Profissional, criativa e rápida.”</strong></p>
-            <div class="small">— Cliente: Padaria Bom Pão</div>
+            <p contenteditable="true"><strong>"Kállita transformou nossa presença online. Profissional, criativa e rápida."</strong></p>
+            <div class="small" contenteditable="true">— Cliente: Padaria Bom Pão</div>
           </div>
           <div class="star">★★★★★</div>
         </div>
 
-        <!-- Testimonial 2 -->
         <div class="test-card">
           <div class="avatar">ML</div>
           <div>
-            <p><strong>“A nova identidade aumentou nosso engajamento e trouxe clientes reais.”</strong></p>
-            <div class="small">— Cliente: Studio Bem</div>
+            <p contenteditable="true"><strong>"A nova identidade aumentou nosso engajamento e trouxe clientes reais."</strong></p>
+            <div class="small" contenteditable="true">— Cliente: Studio Bem</div>
           </div>
           <div class="star">★★★★★</div>
         </div>
 
-        <!-- Testimonial 3 -->
         <div class="test-card">
           <div class="avatar">RG</div>
           <div>
-            <p><strong>“Entrega impecável e atendimento super gentil — recomendo!”</strong></p>
-            <div class="small">— Cliente: Loja Morada</div>
+            <p contenteditable="true"><strong>"Entrega impecável e atendimento super gentil — recomendo!"</strong></p>
+            <div class="small" contenteditable="true">— Cliente: Loja Morada</div>
           </div>
           <div class="star">★★★★☆</div>
         </div>
@@ -448,56 +559,57 @@
       </div>
     </section>
 
-    <!-- SERVICES / PACKAGES -->
-    <h2 class="section-title" id="servicos">Pacotes Personalizados</h2>
+    <h2 class="section-title" id="servicos" contenteditable="true">Pacotes Personalizados</h2>
     <div class="services-grid">
 
-      <div class="service-card">
-        <h4>Pro</h4>
-        <p class="small">Ideal para quem está começando e precisa de identidade visual básica + kit social.</p>
+      <div class="service-card pulse-card">
+        <h4 contenteditable="true">PRO</h4>
+        <p class="small" contenteditable="true">Ideal para quem está começando e precisa de identidade visual básica + kit social.</p>
         <ul style="margin:8px 0 0 16px;color:rgba(255,255,255,0.95)">
-          <li>Logotipo + Manual básico</li>
-          <li>3 Post templates</li>
-          <li>1 Revisão</li>
+          <li contenteditable="true">Logotipo + Manual básico</li>
+          <li contenteditable="true">3 Post templates</li>
+          <li contenteditable="true">1 Revisão</li>
         </ul>
-        <div style="margin-top:auto"><strong class="small">A partir de R$ 1.500</strong></div>
+        <div style="margin-top:auto"><strong class="small" contenteditable="true">A partir de R$ 1.500</strong></div>
+        <a href="#contato" class="btn-contratar" contenteditable="true">CONTRATAR</a>
       </div>
 
       <div class="service-card">
-        <h4>Premium</h4>
-        <p class="small">Pacote mais completo com estratégia de marca e aplicações.</p>
+        <h4 contenteditable="true">PLUS</h4>
+        <p class="small" contenteditable="true">Para quem quer presença digital completa e acompanhamento.</p>
         <ul style="margin:8px 0 0 16px;color:rgba(255,255,255,0.95)">
-          <li>Direção de arte</li>
-          <li>Manual de uso detalhado</li>
-          <li>Posts mensais (pacote)</li>
+          <li contenteditable="true">Estratégia mensal</li>
+          <li contenteditable="true">Criação de campanhas</li>
+          <li contenteditable="true">Suporte prioritário</li>
         </ul>
-        <div style="margin-top:auto"><strong class="small">A partir de R$ 3.800</strong></div>
+        <div style="margin-top:auto"><strong class="small" contenteditable="true">A partir de R$ 2.400/mês</strong></div>
+        <a href="#contato" class="btn-contratar" contenteditable="true">CONTRATAR</a>
       </div>
 
       <div class="service-card">
-        <h4>Plus</h4>
-        <p class="small">Para quem quer presença digital completa e acompanhamento.</p>
+        <h4 contenteditable="true">PREMIUM</h4>
+        <p class="small" contenteditable="true">Pacote mais completo com estratégia de marca e aplicações.</p>
         <ul style="margin:8px 0 0 16px;color:rgba(255,255,255,0.95)">
-          <li>Estratégia mensal</li>
-          <li>Criação de campanhas</li>
-          <li>Suporte prioritário</li>
+          <li contenteditable="true">Direção de arte</li>
+          <li contenteditable="true">Manual de uso detalhado</li>
+          <li contenteditable="true">Posts mensais (pacote)</li>
         </ul>
-        <div style="margin-top:auto"><strong class="small">A partir de R$ 2.400/mês</strong></div>
+        <div style="margin-top:auto"><strong class="small" contenteditable="true">A partir de R$ 3.800</strong></div>
+        <a href="#contato" class="btn-contratar" contenteditable="true">CONTRATAR</a>
       </div>
 
     </div>
 
-    <!-- CONTACT -->
-    <h2 class="section-title" id="contato">Contact & Info</h2>
+    <h2 class="section-title" id="contato" contenteditable="true">Contact & Info</h2>
 
     <section class="contact" aria-label="contact section">
       <div class="info">
-        <h3 class="muted">Contato & Info</h3>
-        <p>Quer transformar sua marca? Me conte sobre seu projeto — vamos conversar!</p>
+        <h3 class="muted" contenteditable="true">Contato & Info</h3>
+        <p contenteditable="true">Quer transformar sua marca? Me conte sobre seu projeto — vamos conversar!</p>
 
-        <p class="small"><strong>Endereço</strong><br/>São Paulo, Brasil</p>
-        <p class="small"><strong>Telefone</strong><br/> +55 (11) 99999-999</p>
-        <p class="small"><strong>Email</strong><br/> seu.nome@mail.com</p>
+        <p class="small"><strong>Endereço</strong><br/><span contenteditable="true">São Paulo, Brasil</span></p>
+        <p class="small"><strong>Telefone</strong><br/><span contenteditable="true">+55 (11) 99999-999</span></p>
+        <p class="small"><strong>Email</strong><br/><span contenteditable="true">seu.nome@mail.com</span></p>
       </div>
 
       <form onsubmit="submitForm(event)" aria-label="formulário de contato">
@@ -506,12 +618,7 @@
         <input class="field" type="text" id="subject" name="subject" placeholder="Assunto (ex: identidade visual)">
         <textarea class="field" id="message" name="message" placeholder="Mensagem" rows="5" required></textarea>
 
-        <!--
-          Observação: GitHub Pages não processa formulários por padrão.
-          Para envio real, use Formspree, Netlify Forms, ou configure um backend.
-          Exemplo com Formspree: action="https://formspree.io/f/{seu-id}" method="POST"
-        -->
-        <button class="btn" type="submit">Enviar Mensagem</button>
+        <button class="btn" type="submit" contenteditable="true">Enviar Mensagem</button>
       </form>
     </section>
 
@@ -521,12 +628,11 @@
     <div style="max-width:1100px;margin:0 auto;padding:0 16px;">
       <div style="display:flex;gap:20px;align-items:center;justify-content:space-between;flex-wrap:wrap">
         <div class="brand" style="color:#fff">kállita</div>
-        <div class="small">© <span id="year"></span> Kállita Design — Todos os direitos reservados</div>
+        <div class="small" contenteditable="true">© <span id="year"></span> Kállita Design — Todos os direitos reservados</div>
       </div>
     </div>
   </footer>
 
-  <!-- SCRIPTS: MENU MOBILE + CAROUSEL SIMPLES + FORM -->
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
 
@@ -534,6 +640,7 @@
     const hambtn = document.getElementById('hambtn');
     hambtn && hambtn.addEventListener('click', () => {
       const m = document.querySelector('.menu');
+      const isExpanded = hambtn.getAttribute('aria-expanded') === 'true';
       if(!m) return;
       if(getComputedStyle(m).display === 'none') {
         m.style.display = 'flex';
@@ -545,9 +652,24 @@
         m.style.padding = '12px';
         m.style.borderRadius = '12px';
         m.style.boxShadow = '0 12px 30px rgba(0,0,0,0.09)';
+        m.style.margin = '0'; // Remover auto-margin quando é mobile/flutuante
+        hambtn.setAttribute('aria-expanded', 'true');
       } else {
         m.style.display = 'none';
+        hambtn.setAttribute('aria-expanded', 'false');
       }
+    });
+
+    // Fechar menu ao clicar em um link (mobile)
+    document.querySelectorAll('.menu a').forEach(link => {
+      link.addEventListener('click', () => {
+        if(window.innerWidth <= 640) {
+          const m = document.querySelector('.menu');
+          const hambtn = document.getElementById('hambtn');
+          m.style.display = 'none';
+          hambtn.setAttribute('aria-expanded', 'false');
+        }
+      });
     });
 
     // CAROUSEL DE TESTEMUNHOS (simples)
@@ -580,13 +702,14 @@
       const name = document.getElementById('name').value;
       const email = document.getElementById('email').value;
       // Aqui você faria um fetch para seu endpoint ou redirecionamento a Formspree
-      alert('Obrigado, ' + name + '! Sua mensagem foi recebida (simulação).\\nEmail: ' + email);
+      alert('Obrigado, ' + name + '! Sua mensagem foi recebida (simulação).\nEmail: ' + email);
       e.target.reset();
     }
 
     // Acessibilidade: esconder menu em resize grande
     window.addEventListener('resize', () => {
       const m = document.querySelector('.menu');
+      const hambtn = document.getElementById('hambtn');
       if(!m) return;
       if(window.innerWidth > 640){
         m.style.display = 'flex';
@@ -598,12 +721,15 @@
         m.style.padding = '';
         m.style.borderRadius = '';
         m.style.boxShadow = '';
+        m.style.margin = '0 auto'; // Re-centraliza
+        hambtn.setAttribute('aria-expanded', 'false');
       } else {
         m.style.display = 'none';
+        m.style.margin = '0';
+        hambtn.setAttribute('aria-expanded', 'false');
       }
     });
   </script>
 
 </body>
 </html>
-
