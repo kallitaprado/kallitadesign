@@ -142,21 +142,37 @@
        HERO & SEÇÃO DE MARCAS
        =========================== */
     .hero-wrap{
-      max-width:1100px;
-      margin:24px auto 0;
+      width: 100%;
+      margin: 0;
     }
 
     .hero{
-      /* Removendo metrics para div separada */
-      background:var(--hero);
+      /* Hero expandido com imagem de fundo */
       color:var(--white);
-      border-radius:12px;
-      padding:40px 32px;
-      box-shadow:var(--shadow);
+      padding: 120px 32px;
       position:relative;
       overflow:hidden;
       animation:fadeInUp .8s ease both;
-      margin-bottom: 24px; /* Espaçamento após o hero */
+      margin-bottom: 0;
+      /* Imagem de fundo - substitua pela sua */
+      background-image: url('https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3');
+      background-size: cover;
+      background-position: center;
+      text-align: center;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: 1;
+    }
+    .hero h1, .hero p {
+      position: relative;
+      z-index: 2;
     }
     .hero h1{
       font-family:"Baloo 2";
@@ -174,7 +190,7 @@
     /* Métrica fora do HERO */
     .metrics-section{
       max-width:1100px;
-      margin:0 auto 32px; /* Margem ajustada para ficar abaixo do Hero */
+      margin:0 auto 32px;
       padding:0 16px;
     }
     .metrics{
@@ -202,14 +218,14 @@
     /* ABOUT US - menor e editável */
     .about{
       display:grid;
-      grid-template-columns: 180px 1fr; /* Coluna da imagem menor */
+      grid-template-columns: 180px 1fr;
       gap:28px;
       align-items:center;
       margin-top:28px;
       background:transparent;
     }
     .about-photo-wrap{
-      width:180px; /* Tamanho do container menor */
+      width:180px;
       height:180px;
       border-radius:28px;
       background:var(--card);
@@ -222,7 +238,6 @@
     .about .about-text-content p{ color:var(--muted); margin-top:8px; }
     .about .small{ }
 
-
     .cta-handle{
       display:inline-block;
       margin-top:14px;padding:8px 14px;border-radius:999px;
@@ -233,7 +248,7 @@
     /* PORTFÓLIO - Últimos Projetos */
     .section-title{
       font-family:"Baloo 2";
-      color:var(--project-color); /* Usando a nova variável para cor */
+      color:var(--project-color);
       margin:36px 0 18px;
       font-size:22px;
     }
@@ -243,9 +258,9 @@
       gap:18px;
     }
     .project{
-      background:var(--project-color); /* Cor de fundo alterada */
+      background:var(--project-color);
       color:var(--white);
-      padding:16px;border-radius:12px;min-height:280px; /* Altura aumentada para caber imagem */
+      padding:16px;border-radius:12px;min-height:280px;
       display:flex;flex-direction:column;justify-content:end;position:relative;
       overflow:hidden;box-shadow:var(--shadow);
       transition:transform .28s ease, box-shadow .28s ease;
@@ -266,7 +281,7 @@
     .project:hover .project-image-wrap img{ opacity:1; }
 
     .project .meta{
-      background:rgba(0,0,0,0.4); /* Fundo escuro para destacar texto */
+      background:rgba(0,0,0,0.4);
       padding:8px;border-radius:8px;font-size:13px;color:#fff;
       margin-top:8px;position:relative;z-index:2;
     }
@@ -305,6 +320,7 @@
       box-shadow:var(--shadow); min-height:160px;
       display:flex;flex-direction:column; gap:10px;
       transition:transform .2s ease, box-shadow .3s ease;
+      position: relative;
     }
     .service-card:hover{ transform:translateY(-8px) }
 
@@ -363,9 +379,43 @@
       margin-top:36px;padding:32px 16px;background:var(--hero); color:var(--white);border-radius:8px;
     }
 
+    /* NOVOS ESTILOS PARA OS PACOTES */
+    .price-container {
+      margin-top: auto;
+    }
+    
+    .original-price {
+      text-decoration: line-through;
+      font-size: 14px;
+      opacity: 0.7;
+      margin-bottom: 5px;
+    }
+    
+    .promo-price {
+      font-size: 22px;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    
+    .installments {
+      font-size: 12px;
+      opacity: 0.9;
+      margin-bottom: 10px;
+    }
+    
+    .countdown-timer {
+      background: #ffd66a;
+      color: #3b2a2a;
+      padding: 8px;
+      border-radius: 8px;
+      font-size: 12px;
+      text-align: center;
+      margin: 10px 0;
+      font-weight: bold;
+    }
+
     /* SMALLER SCREENS */
     @media (max-width:920px){
-      /* Reduzindo o ABOUT US para telas menores */
       .about{ grid-template-columns: 160px 1fr; }
       .about-photo-wrap{ width:160px; height:160px; }
       .hero h1{ font-size:64px }
@@ -377,10 +427,22 @@
     @media (max-width:640px){
       .topbar{padding:10px}
       .brand{ font-size:34px }
-      .menu{ display:none; margin:0 auto; } /* Força centralização quando visível no JS */
+      .menu{ display:none; margin:0 auto; }
       .hamburger{ display:flex }
       .hero h1{ font-size:44px }
-      .about{ grid-template-columns:1fr; grid-auto-rows:auto; }
+      .hero {
+        padding: 80px 20px;
+      }
+      .about{ 
+        grid-template-columns:1fr; 
+        grid-auto-rows:auto;
+        text-align: center;
+      }
+      .about-photo-wrap{ 
+        width:140px; 
+        height:140px;
+        margin: 0 auto;
+      }
       .portfolio-grid{ grid-template-columns:1fr }
       .services-grid{ grid-template-columns:1fr }
       .contact{ grid-template-columns:1fr }
@@ -403,7 +465,7 @@
 </head>
 <body>
 
-  <a href="https://wa.me/5519999005784?text=Ol%C3%A1%2C%20gostaria%20de%20conversar%20sobre%20um%20projeto." target="_blank" class="whatsapp-btn" id="whatsapp-btn" title="Chamar no WhatsApp">
+  <a href="https://wa.me/5511999999999?text=Ol%C3%A1%2C%20gostaria%20de%20conversar%20sobre%20um%20projeto." target="_blank" class="whatsapp-btn" id="whatsapp-btn" title="Chamar no WhatsApp">
     <svg fill="currentColor" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
       <path d="M12.04 1C6.062 1 1.258 5.757 1.258 11.666c0 1.942.502 3.824 1.458 5.467l-1.63 6.136 6.307-1.597c1.583.87 3.393 1.341 5.605 1.341 5.979 0 10.783-4.757 10.783-10.666S18.019 1 12.04 1zm3.878 14.505c-.214.354-.863.354-1.299.106-.436-.214-2.18-.847-2.527-.923-.347-.076-.595-.038-.863.354s-1.025 1.341-1.24 1.555c-.214.184-.436.214-.809.106-.436-.106-1.673-.67-3.193-1.956-1.189-1.025-1.975-2.262-2.223-2.641-.248-.378-.027-.587.184-.827.184-.184.42-.436.634-.67.184-.214.248-.354.347-.587.098-.214.053-.408-.027-.587-.076-.214-.66-.991-.908-1.24-.248-.248-.42-.214-.587-.214-.141 0-.308-.03-.475-.03-.49 0-1.077.214-1.464.57s-1.341 1.31-1.341 3.251c0 1.903 1.362 3.824 1.555 4.072.193.248 2.584 4.034 6.307 5.676 3.513 1.576 3.513 1.056 4.11 1.056.634 0 2.062-.801 2.388-1.555.326-.754.326-1.388.228-1.555-.133-.248-.49-.395-1.025-.668z"/>
     </svg>
@@ -414,7 +476,7 @@
       <div class="logo">
         <div class="logo-brand" aria-hidden="true">
           <div id="logo-image-container" style="width:50px;height:50px;border-radius:50%;overflow:hidden;background:#fff">
-            <img src="https://i.imgur.com/mbheHDy.png" alt="" style="width:100%;height:100%;object-fit:cover;">
+            <img src="https://via.placeholder.com/50/FF6B5C/FFFFFF?text=L" alt="Logo Kállita" style="width:100%;height:100%;object-fit:cover;">
           </div>
           <div class="brand" contenteditable="true">kállita</div>
           <div class="small muted" contenteditable="true">Seja bem-vindo(a)</div>
@@ -466,7 +528,7 @@
 
     <section class="about" id="sobre">
       <div class="about-photo-wrap" aria-hidden="true">
-        <img src="https://i.imgur.com/tcGZZII.png" alt="Foto - Kállita">
+        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=a1f8f2a9f7b4a1ad3a2e5c0f901c2f5f" alt="Foto - Kállita">
       </div>
 
       <div class="about-copy">
@@ -479,7 +541,7 @@
           </p>
         </div>
 
-        <a class="cta-handle" href="https://www.instagram.com/akallitaprado" target="_blank" rel="noopener" contenteditable="true"> @kallitaprado </a>
+        <a class="cta-handle" href="https://www.instagram.com/kallitaprado" target="_blank" rel="noopener" contenteditable="true"> @kallitaprado </a>
       </div>
     </section>
 
@@ -488,7 +550,7 @@
     <div class="portfolio-grid" aria-live="polite">
       <a href="seu-link-para-projeto-1.html" target="_blank" class="project">
         <div class="project-image-wrap">
-          <img src="https://i.imgur.com/z6CNpVv.jpeg" alt="Capa Projeto 1">
+          <img src="https://via.placeholder.com/400x300/F74F4F/FFFFFF?text=Projeto+1" alt="Capa Projeto 1">
         </div>
         <div class="meta" contenteditable="true">
           <strong>Projeto Nome 1</strong>
@@ -498,7 +560,7 @@
 
       <a href="seu-link-para-projeto-2.html" target="_blank" class="project">
         <div class="project-image-wrap">
-          <img src="https://i.imgur.com/1gFTNab.png" alt="Capa Projeto 2">
+          <img src="https://via.placeholder.com/400x300/F74F4F/FFFFFF?text=Projeto+2" alt="Capa Projeto 2">
         </div>
         <div class="meta" contenteditable="true">
           <strong>Projeto Nome 2</strong>
@@ -508,7 +570,7 @@
 
       <a href="seu-link-para-projeto-3.html" target="_blank" class="project">
         <div class="project-image-wrap">
-          <img src="https://i.imgur.com/WVU2L9h.png" alt="Capa Projeto 3">
+          <img src="https://via.placeholder.com/400x300/F74F4F/FFFFFF?text=Projeto+3" alt="Capa Projeto 3">
         </div>
         <div class="meta" contenteditable="true">
           <strong>Projeto Nome 3</strong>
@@ -570,8 +632,13 @@
           <li contenteditable="true">3 Post templates</li>
           <li contenteditable="true">1 Revisão</li>
         </ul>
-        <div style="margin-top:auto"><strong class="small" contenteditable="true">A partir de R$ 1.500</strong></div>
-        <a href="#contato" class="btn-contratar" contenteditable="true">CONTRATAR</a>
+        <div class="price-container">
+          <div class="original-price" contenteditable="true">De: R$ 2.000</div>
+          <div class="promo-price" contenteditable="true">Por: R$ 1.500</div>
+          <div class="installments" contenteditable="true">ou 12x de R$ 125,00 com juros</div>
+        </div>
+        <div class="countdown-timer" id="countdown-pro">Últimas horas para adquirir por 25% de desconto!</div>
+        <a href="https://wa.me/5511999999999?text=Olá! Gostaria de contratar o pacote PRO" target="_blank" class="btn-contratar">CONTRATAR</a>
       </div>
 
       <div class="service-card">
@@ -582,8 +649,13 @@
           <li contenteditable="true">Criação de campanhas</li>
           <li contenteditable="true">Suporte prioritário</li>
         </ul>
-        <div style="margin-top:auto"><strong class="small" contenteditable="true">A partir de R$ 2.400/mês</strong></div>
-        <a href="#contato" class="btn-contratar" contenteditable="true">CONTRATAR</a>
+        <div class="price-container">
+          <div class="original-price" contenteditable="true">De: R$ 3.200/mês</div>
+          <div class="promo-price" contenteditable="true">Por: R$ 2.400/mês</div>
+          <div class="installments" contenteditable="true">ou 12x de R$ 200,00 com juros</div>
+        </div>
+        <div class="countdown-timer" id="countdown-plus">Últimas horas para adquirir por 25% de desconto!</div>
+        <a href="https://wa.me/5511999999999?text=Olá! Gostaria de contratar o pacote PLUS" target="_blank" class="btn-contratar">CONTRATAR</a>
       </div>
 
       <div class="service-card">
@@ -594,8 +666,13 @@
           <li contenteditable="true">Manual de uso detalhado</li>
           <li contenteditable="true">Posts mensais (pacote)</li>
         </ul>
-        <div style="margin-top:auto"><strong class="small" contenteditable="true">A partir de R$ 3.800</strong></div>
-        <a href="#contato" class="btn-contratar" contenteditable="true">CONTRATAR</a>
+        <div class="price-container">
+          <div class="original-price" contenteditable="true">De: R$ 4.750</div>
+          <div class="promo-price" contenteditable="true">Por: R$ 3.800</div>
+          <div class="installments" contenteditable="true">ou 12x de R$ 316,67 com juros</div>
+        </div>
+        <div class="countdown-timer" id="countdown-premium">Últimas horas para adquirir por 20% de desconto!</div>
+        <a href="https://wa.me/5511999999999?text=Olá! Gostaria de contratar o pacote PREMIUM" target="_blank" class="btn-contratar">CONTRATAR</a>
       </div>
 
     </div>
@@ -729,8 +806,36 @@
         hambtn.setAttribute('aria-expanded', 'false');
       }
     });
+
+    // CONTAGEM REGRESSIVA PARA OS PACOTES
+    function updateCountdown() {
+      // Definir a data de término (exemplo: 24 horas a partir de agora)
+      const endDate = new Date();
+      endDate.setHours(endDate.getHours() + 24);
+      
+      const now = new Date().getTime();
+      const distance = endDate - now;
+      
+      if (distance < 0) {
+        document.querySelectorAll('.countdown-timer').forEach(timer => {
+          timer.innerHTML = "Oferta expirada!";
+        });
+        return;
+      }
+      
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      
+      document.querySelectorAll('.countdown-timer').forEach(timer => {
+        timer.innerHTML = `Últimas ${hours}h ${minutes}m ${seconds}s para adquirir com desconto!`;
+      });
+    }
+    
+    // Atualizar a contagem regressiva a cada segundo
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
   </script>
 
 </body>
 </html>
-
