@@ -24,11 +24,10 @@
       --white: #fff;
       --shadow: 0 8px 20px rgba(18,18,18,0.08);
       --radius-lg: 22px;
-      /* NOVA VARIÁVEL: Cor dos projetos (Portfólio) */
       --project-color: #F74F4F;
     }
 
-    *{box-sizing:border-box}
+    *{box-sizing:border-box; margin:0; padding:0;}
     html,body{height:100%}
     body{
       margin:0;
@@ -142,47 +141,25 @@
        HERO & SEÇÃO DE MARCAS
        =========================== */
     .hero-wrap{
-      width: 100%;
-      margin: 0;
+      max-width:1100px;
+      margin:24px auto 0;
     }
 
     .hero{
+      background:var(--hero);
       color:var(--white);
-      padding: 140px 5%;
+      border-radius:12px;
+      padding:40px 32px;
+      box-shadow:var(--shadow);
       position:relative;
       overflow:hidden;
       animation:fadeInUp .8s ease both;
-      margin-bottom: 0;
-      background-image: url('https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3');
-      background-size: cover;
-      background-position: center;
-      text-align: center;
-      min-height: 70vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0, 0, 0, 0.5);
-      z-index: 1;
-    }
-    .hero h1, .hero p {
-      position: relative;
-      z-index: 2;
-      max-width: 800px;
-      margin-left: auto;
-      margin-right: auto;
+      margin-bottom: 24px;
     }
     .hero h1{
       font-family:"Baloo 2";
       font-size:92px;
-      margin:0 0 20px;
+      margin:0 0 6px;
       line-height:0.9;
       letter-spacing:1px;
     }
@@ -190,7 +167,6 @@
       margin:0;
       font-weight:600;
       opacity:.95;
-      font-size: 1.2rem;
     }
 
     /* Métrica fora do HERO */
@@ -368,6 +344,8 @@
       border: none;
       cursor: pointer;
       font-family: inherit;
+      display: block;
+      width: 100%;
     }
     .btn-contratar:hover{ 
       opacity: .8;
@@ -394,6 +372,7 @@
       outline:none;
       color: var(--white);
       font-family: inherit;
+      width: 100%;
     }
     .field::placeholder {
       color: rgba(255,255,255,0.7);
@@ -403,6 +382,7 @@
       cursor:pointer;font-weight:700;display:inline-block;
       box-shadow:0 8px 20px rgba(240,90,82,0.18);
       font-family: inherit;
+      width: 100%;
     }
 
     /* FOOTER */
@@ -473,7 +453,6 @@
       .brand{ font-size:34px }
       .menu{ 
         display:none; 
-        margin:0 auto; 
         position: absolute;
         top: 70px;
         right: 16px;
@@ -482,12 +461,10 @@
         padding: 12px;
         border-radius: 12px;
         box-shadow: 0 12px 30px rgba(0,0,0,0.09);
+        z-index: 100;
       }
       .hamburger{ display:flex }
       .hero h1{ font-size:44px }
-      .hero {
-        padding: 80px 20px;
-      }
       .about{ 
         grid-template-columns:1fr; 
         grid-auto-rows:auto;
@@ -514,7 +491,16 @@
     .muted{ color:var(--muted) }
     .center{ text-align:center }
     .small{ font-size:13px }
-    .pill{ display:inline-block;padding:6px 12px;border-radius:999px;background:rgba(0,0,0,.04);font-weight:600 }
+    .pill{ 
+      display:inline-block;
+      padding:6px 12px;
+      border-radius:999px;
+      background:rgba(0,0,0,.04);
+      font-weight:600;
+      cursor: pointer;
+      border: none;
+      font-family: inherit;
+    }
 
   </style>
 </head>
@@ -769,67 +755,87 @@
   </footer>
 
   <script>
+    // Ano atual no footer
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // MOBILE MENU - simples toggle que abre navegação quando em telas pequenas
+    // MOBILE MENU
     const hambtn = document.getElementById('hambtn');
-    hambtn && hambtn.addEventListener('click', () => {
-      const m = document.querySelector('.menu');
-      const isExpanded = hambtn.getAttribute('aria-expanded') === 'true';
-      if(!m) return;
-      if(getComputedStyle(m).display === 'none') {
-        m.style.display = 'flex';
-        hambtn.setAttribute('aria-expanded', 'true');
-      } else {
-        m.style.display = 'none';
-        hambtn.setAttribute('aria-expanded', 'false');
-      }
-    });
+    const menu = document.querySelector('.menu');
+    
+    if (hambtn && menu) {
+      hambtn.addEventListener('click', () => {
+        const isExpanded = hambtn.getAttribute('aria-expanded') === 'true';
+        
+        if (menu.style.display === 'none' || !menu.style.display) {
+          menu.style.display = 'flex';
+          menu.style.position = 'absolute';
+          menu.style.right = '16px';
+          menu.style.top = '70px';
+          menu.style.flexDirection = 'column';
+          menu.style.background = 'rgba(255,255,255,0.95)';
+          menu.style.padding = '12px';
+          menu.style.borderRadius = '12px';
+          menu.style.boxShadow = '0 12px 30px rgba(0,0,0,0.09)';
+          menu.style.margin = '0';
+          hambtn.setAttribute('aria-expanded', 'true');
+        } else {
+          menu.style.display = 'none';
+          hambtn.setAttribute('aria-expanded', 'false');
+        }
+      });
+    }
 
     // Fechar menu ao clicar em um link (mobile)
     document.querySelectorAll('.menu a').forEach(link => {
       link.addEventListener('click', () => {
         if(window.innerWidth <= 640) {
-          const m = document.querySelector('.menu');
-          const hambtn = document.getElementById('hambtn');
-          m.style.display = 'none';
+          menu.style.display = 'none';
           hambtn.setAttribute('aria-expanded', 'false');
         }
       });
     });
 
-    // CAROUSEL DE TESTEMUNHOS (simples)
+    // CAROUSEL DE TESTEMUNHOS
     let currentTest = 0;
     const tests = Array.from(document.querySelectorAll('#testWrap .test-card'));
+    
     function showTest(index){
-      tests.forEach((t,i)=> {
+      tests.forEach((t,i) => {
         t.style.display = (i === index) ? 'flex' : 'none';
       });
     }
+    
     function nextTest(){
       currentTest = (currentTest + 1) % tests.length;
       showTest(currentTest);
     }
+    
     function prevTest(){
       currentTest = (currentTest - 1 + tests.length) % tests.length;
       showTest(currentTest);
     }
-    // inicializa
-    if(tests.length) showTest(0);
-    // auto-rotaciona a cada 6s
+    
+    // Inicializa carousel
+    if(tests.length > 0) {
+      showTest(0);
+    }
+    
+    // Auto-rotaciona a cada 6s
     setInterval(nextTest, 6000);
 
     // Funções globais usadas nos botões
-    function viewAll(){ alert('Levar para página de portfólio completo (substitua por link real).'); }
+    function viewAll(){ 
+      alert('Levar para página de portfólio completo (substitua por link real).'); 
+    }
 
-    // FORM: apenas simula envio (substitua action por Formspree/Netlify para produção)
+    // FORM: apenas simula envio
     function submitForm(e){
       e.preventDefault();
       const name = document.getElementById('name').value;
       const email = document.getElementById('email').value;
-      // Aqui você faria um fetch para seu endpoint ou redirecionamento a Formspree
       alert('Obrigado, ' + name + '! Sua mensagem foi recebida (simulação).\nEmail: ' + email);
       e.target.reset();
+      return false;
     }
 
     // Função para redirecionar para WhatsApp com mensagem personalizada
@@ -882,26 +888,40 @@
 
     // Acessibilidade: esconder menu em resize grande
     window.addEventListener('resize', () => {
-      const m = document.querySelector('.menu');
-      const hambtn = document.getElementById('hambtn');
-      if(!m) return;
       if(window.innerWidth > 640){
-        m.style.display = 'flex';
-        m.style.position = '';
-        m.style.top = '';
-        m.style.right = '';
-        m.style.flexDirection = '';
-        m.style.background = '';
-        m.style.padding = '';
-        m.style.borderRadius = '';
-        m.style.boxShadow = '';
-        m.style.margin = '0 auto'; // Re-centraliza
+        menu.style.display = 'flex';
+        menu.style.position = '';
+        menu.style.top = '';
+        menu.style.right = '';
+        menu.style.flexDirection = '';
+        menu.style.background = '';
+        menu.style.padding = '';
+        menu.style.borderRadius = '';
+        menu.style.boxShadow = '';
+        menu.style.margin = '0 auto';
         hambtn.setAttribute('aria-expanded', 'false');
       } else {
-        m.style.display = 'none';
-        m.style.margin = '0';
+        menu.style.display = 'none';
+        menu.style.margin = '0';
         hambtn.setAttribute('aria-expanded', 'false');
       }
+    });
+
+    // Rolagem suave para âncoras
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        if(targetId === '#') return;
+        
+        const targetElement = document.querySelector(targetId);
+        if(targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 80,
+            behavior: 'smooth'
+          });
+        }
+      });
     });
   </script>
 
